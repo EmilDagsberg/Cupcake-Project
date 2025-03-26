@@ -36,6 +36,7 @@ public class Main {
         // Routing
         app.get("/", ctx -> ctx.render("index.html"));
         app.get("order", ctx -> ctx.render("order.html"));
+        app.get("basket", ctx -> ctx.render("basket.html"));
     }
 
 
