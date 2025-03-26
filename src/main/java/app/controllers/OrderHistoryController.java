@@ -1,6 +1,8 @@
 package app.controllers;
 
 import app.persistence.ConnectionPool;
+import app.persistence.CupcakeBotMapper;
+import app.persistence.CupcakeTopMapper;
 import app.persistence.OrderHistoryMapper;
 import io.javalin.http.Context;
 
@@ -11,7 +13,7 @@ private static final ConnectionPool connectionPool = ConnectionPool.getInstance(
 );
 
 private static final OrderHistoryMapper orderHistoryMapper = new OrderHistoryMapper(connectionPool);
-private static OrderHistoryController controller = new OrderHistoryController();
+//private static OrderHistoryController controller = new OrderHistoryController(CupcakeBotMapper, CupcakeTopMapper);
 
 public static void orderPage(Context ctx){
     ctx.render(""); // Insert HTML for page to see order here

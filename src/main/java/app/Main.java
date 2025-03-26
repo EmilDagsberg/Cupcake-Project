@@ -2,6 +2,7 @@ package app;
 
 import app.config.SessionConfig;
 import app.config.ThymeleafConfig;
+import app.controllers.CupcakeController;
 import app.persistence.ConnectionPool;
 import io.javalin.Javalin;
 import io.javalin.rendering.template.JavalinThymeleaf;
@@ -21,6 +22,7 @@ public class Main {
 
     private static final ConnectionPool connectionPool = ConnectionPool.getInstance(USER, PASSWORD, URL, DB);
 
+    private static final CupcakeController cupcakeController = new CupcakeController(connectionPool);
 
     public static void main(String[] args)
     {
@@ -36,7 +38,9 @@ public class Main {
         // Routing
         app.get("/", ctx -> ctx.render("index.html"));
         app.get("order", ctx -> ctx.render("order.html"));
+        app.post("/order", ctx -> cupcakeController.handleOrder(ctx));
         app.get("basket", ctx -> ctx.render("basket.html"));
+
     }
 
 
