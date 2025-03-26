@@ -15,22 +15,17 @@ public class CupcakeTopMapper {
     public CupcakeTopMapper(ConnectionPool connectionPool) {this.connectionPool = connectionPool;}
 
 
-    public CupcakeTop getCupcakeTop(String topping, double price, int top_id) {
-        String sql = "select * from Cupcake_top where topping=?" +
-                " and price=?" +
-                "and top_id=?";
+    public CupcakeTop getCupcakeTop(String topping) {
+        String sql = "select * from cupcake_top where topping=?";
 
         try (Connection conn = connectionPool.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
 
             stmt.setString(1, (topping));
-            stmt.setDouble(2, price);
-            stmt.setInt(3, top_id);
             ResultSet rs = stmt.executeQuery();
 
             if (rs.next()) {
-                System.out.println("Topping: " + topping + " Price: " + price + " Top ID: " + top_id);
                 return new CupcakeTop(
                         rs.getInt("top_id"),
                         rs.getString("topping"),
@@ -44,7 +39,7 @@ public class CupcakeTopMapper {
     }
 
     public boolean buyCupcakeTop(String topping, double price, int top_id) {
-        String sql = "SELECT price FROM Cupcake_top WHERE topping=? AND top_id=?";
+        String sql = "SELECT price FROM cupcake_top WHERE topping=? AND top_id=?";
 
         try(Connection conn = connectionPool.getConnection();
             PreparedStatement stmt = conn.prepareStatement(sql)){
