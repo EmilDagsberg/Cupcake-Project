@@ -10,7 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class UserMapper {
-    public static User login(String mail, String password) {
+    public static User login(String mail, String password, ConnectionPool connectionPool) throws DatabaseException {
         String sql = "select* from users where mail=? and password=?";
 
         try (
@@ -20,12 +20,12 @@ public class UserMapper {
             ps.setString(1, mail);
             ps.setString(2, password);
 
-            // maybe insert "amount" in this if statement
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 int id = rs.getInt("user_id");
-                String role = rs.getBoolean("role");
-                return new User(id, mail, password);
+                double amount = rs.getDouble("amount");
+                boolean role = rs.getBoolean("role");
+                return new User(id, mail, password, amount,role);
             } else {
                 throw new DatabaseException("Fejl i login. Prøv igen");
             }
