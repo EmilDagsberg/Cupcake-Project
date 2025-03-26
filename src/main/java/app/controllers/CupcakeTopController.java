@@ -38,7 +38,7 @@ public class CupcakeTopController {
             boolean success = cupcakeTopMapper.buyCupcakeTop(topping, expectedPrice, top_id);
 
             if (success) {
-                ctx.result("Purchase successful! You bought a " + topping + " for $" + expectedPrice);
+                ctx.result("Purchase successful! You bought a " + topping + " for " + expectedPrice);
             } else {
                 ctx.status(400).result("Purchase failed: Invalid price or item not found.");
             }
