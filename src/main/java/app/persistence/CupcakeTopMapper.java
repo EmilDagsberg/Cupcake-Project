@@ -10,12 +10,8 @@ import java.sql.SQLException;
 
 public class CupcakeTopMapper {
 
-    private final ConnectionPool connectionPool;
 
-    public CupcakeTopMapper(ConnectionPool connectionPool) {this.connectionPool = connectionPool;}
-
-
-    public CupcakeTop getCupcakeTop(String topping) {
+    public static CupcakeTop getCupcakeTop(String topping, ConnectionPool connectionPool) {
         String sql = "select * from cupcake_top where topping=?";
 
         try (Connection conn = connectionPool.getConnection();
@@ -38,7 +34,7 @@ public class CupcakeTopMapper {
         return null; // Cupcake topping not found
     }
 
-    public boolean buyCupcakeTop(String topping, double price, int top_id) {
+    public boolean buyCupcakeTop(String topping, double price, int top_id, ConnectionPool connectionPool) {
         String sql = "SELECT price FROM cupcake_top WHERE topping=? AND top_id=?";
 
         try(Connection conn = connectionPool.getConnection();
