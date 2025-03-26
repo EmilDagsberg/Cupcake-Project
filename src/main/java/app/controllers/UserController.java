@@ -29,9 +29,9 @@ public class UserController {
             ctx.render("index.html");
 
         }catch (DatabaseException e){
-            // hvis nej, send tilbage til forside med fejl besked
+            // hvis nej, send tilbage til login med fejl besked
             ctx.attribute("message", e.getMessage());
-            ctx.render("index.html");
+            ctx.render("login.html");
         }
     }
 
