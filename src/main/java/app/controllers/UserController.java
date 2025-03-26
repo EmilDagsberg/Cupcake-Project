@@ -13,6 +13,7 @@ public class UserController {
 
     public static void addRoutes(Javalin app, ConnectionPool connectionPool)    {
         app.post("login", ctx -> login(ctx, connectionPool));
+        app.get("login", ctx -> ctx.render("login.html"));
     }
 
 
@@ -26,6 +27,7 @@ public class UserController {
             User user = UserMapper.login(mail, password, connectionPool);
             ctx.sessionAttribute("currentUser", user);
             // Hvis ja, send videre til index.html
+            ctx.attribute("message", "Velkommen: " + mail);
             ctx.render("index.html");
 
         }catch (DatabaseException e){
@@ -34,5 +36,6 @@ public class UserController {
             ctx.render("login.html");
         }
     }
+
 
 }

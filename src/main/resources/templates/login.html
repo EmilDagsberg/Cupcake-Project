@@ -11,7 +11,7 @@
 <form method="post">
 
     <input type="text" name="mail" placeholder="Enter your mail">
-    <input type="text" name="password" placeholder="Enter you password">
+    <input type="text" name="password" placeholder="Enter you password" autocomplete="off">
 
     <button type="submit" formaction="/login">Get access to paradise</button>
     <div><p class="error" th:unless="${#strings.isEmpty(message)}" th:text="${message}"></p></div>
