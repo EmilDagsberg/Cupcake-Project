@@ -7,5 +7,11 @@
 <body>
 <p><a href="login.html" th:href="@{/login}">Login</a></p>
 <p th:text="${message}"></p>
+
+<div th:if="${session.currentUser != null}">
+    <span th:text="${session.currentUser.mail}"></span> |
+    <a href="login.html" th:href="@{/logout}">Logout</a>
+</div>
+
 </body>
 </html>

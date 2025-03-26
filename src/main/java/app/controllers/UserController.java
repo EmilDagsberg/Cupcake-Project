@@ -14,6 +14,7 @@ public class UserController {
     public static void addRoutes(Javalin app, ConnectionPool connectionPool)    {
         app.post("login", ctx -> login(ctx, connectionPool));
         app.get("login", ctx -> ctx.render("login.html"));
+        app.get("logout", ctx -> logout(ctx));
     }
 
 
@@ -35,6 +36,11 @@ public class UserController {
             ctx.attribute("message", e.getMessage());
             ctx.render("login.html");
         }
+    }
+
+    public static void logout(Context ctx)  {
+        ctx.req().getSession().invalidate();
+        ctx.redirect("/");
     }
 
 
