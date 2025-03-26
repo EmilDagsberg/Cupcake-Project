@@ -15,5 +15,5 @@ private static OrderHistoryController controller = new OrderHistoryController();
 
 public static void orderPage(Context ctx){
     ctx.render(""); // Insert HTML for page to see order here
-}
+    }
 }
