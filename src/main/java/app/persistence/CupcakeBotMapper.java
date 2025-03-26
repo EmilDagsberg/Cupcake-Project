@@ -14,7 +14,7 @@ public class CupcakeBotMapper {
     public CupcakeBotMapper(ConnectionPool connectionPool) {this.connectionPool = connectionPool;}
 
 
-    public CupcakeBot getCupcakeBot(String bottom) {
+    public static CupcakeBot getCupcakeBot(String bottom, ConnectionPool connectionPool) {
         String sql = "select * from cupcake_bottom where bottom=?";
 
         try (Connection conn = connectionPool.getConnection();
