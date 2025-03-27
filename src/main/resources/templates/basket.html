@@ -17,7 +17,7 @@
 <p>Kunder</p>
 <img alt="basketLogo" src="../public/images/basketIcon.png" th:src="@{/images/basketIcon.png}"/>
 
-
+<div th:if="${paymentStatus != true}">
 <div th:if="${orders != null && !orders.isEmpty()}">
     <div id="order-list">
         <ul>
@@ -45,6 +45,13 @@
 <form action="/order" method="GET">
     <button type="submit">Fortsæt med at bestille</button>
 </form>
+    <div><p class="error" th:unless="${#strings.isEmpty(message)}" th:text="${message}"> </p></div>
+</div>
 
+<div th:if="${paymentStatus}">
+    <h2>Tak for din ordre!</h2>
+    <p>Din ordre er betalt og registreret!</p>
+    <p>Du kan nu hente din ordre i vores butik</p>
+</div>
 </body>
 </html>

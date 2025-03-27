@@ -47,6 +47,7 @@ public class Main {
         app.get("/order", ctx -> ctx.render("order.html"));
         app.post("/order", ctx -> cupcakeController.handleOrder(ctx));
         app.get("/basket", ctx -> basketController.showBasket(ctx));
+        app.post("/basket", ctx -> basketController.handlePayment(ctx));
 
     }
 
