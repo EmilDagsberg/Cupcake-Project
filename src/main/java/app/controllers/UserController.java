@@ -7,14 +7,14 @@ import app.persistence.UserMapper;
 import io.javalin.Javalin;
 import io.javalin.http.Context;
 
-import java.util.List;
-
 public class UserController {
 
     public static void addRoutes(Javalin app, ConnectionPool connectionPool)    {
         app.post("login", ctx -> login(ctx, connectionPool));
         app.get("login", ctx -> ctx.render("login.html"));
         app.get("logout", ctx -> logout(ctx));
+        app.get("createuser", ctx -> ctx.render("createuser.html"));
+        app.post("createuser", ctx -> createUser(ctx, connectionPool));
     }
 
 
@@ -43,14 +43,14 @@ public class UserController {
         ctx.redirect("/");
     }
 
-    private static void createAccount(Context ctx, ConnectionPool connectionPool) {
+    private static void createUser(Context ctx, ConnectionPool connectionPool) {
         String mail = ctx.formParam("mail");
         String password1 = ctx.formParam("password1");
         String password2 = ctx.formParam("password2");
 
         if (password1.equals(password2))    {
             try {
-                UserMapper.createAccount(mail, password1, connectionPool);
+                UserMapper.createUser(mail, password1, connectionPool);
                 ctx.attribute("message", "Konto oprettet: " + mail + ". Venligst login");
                 ctx.render("login.html");
             } catch (DatabaseException e)   {

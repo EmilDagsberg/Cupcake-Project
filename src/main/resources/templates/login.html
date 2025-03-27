@@ -18,5 +18,12 @@
 
 </form>
 
+<div th:if="${session.currentUser != null}">
+    <span th:text="${session.currentUser.mail}"></span> |
+    <a href="login.html" th:href="@{/logout}">Logout</a>
+</div>
+
+<a href="createuser.html" th:href="@{/createuser}">Create user</a>
+
 </body>
 </html>
