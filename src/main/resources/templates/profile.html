@@ -6,5 +6,31 @@
 </head>
 <body>
 
+<h2>Profile</h2>
+
+<form method="post">
+
+    <table>
+        <tr>
+            <td>Current balance:</td>
+            <td th:text="${session.currentUser.amount}"></td>
+            <td>DKK.</td>
+        </tr>
+        <tr>
+            <td>Mail:</td>
+            <td th:text="${session.currentUser.mail}"></td>
+            <td><input type="text" name="mail" placeholder="New mail address here"></td>
+            <td><button type="submit" name="profileinfo" th:value="${session.currentUser.mail}" formaction="editinfo">Edit</button></td>
+        </tr>
+        <tr>
+            <td>Password:</td>
+            <td th:text="${session.currentUser.password}"></td>
+            <td><input type="text" name="password" placeholder="New password here"></td>
+            <td><button type="submit" name="profileinfo" th:value="${session.currentUser.password}" formaction="editinfo">Edit</button></td>
+        </tr>
+    </table>
+
+</form>
+
 </body>
 </html>
