@@ -1,5 +1,6 @@
 package app.controllers;
 
+
 import app.entities.CupcakeBot;
 import app.entities.CupcakeTop;
 import app.entities.OrderDetails;
@@ -30,7 +31,7 @@ public class BasketController {
         for (OrderDetails order : orders) {
             if(!bottomNames.containsKey(order.getBotID())) {
                 CupcakeBot cakeBot = BasketMapper.getNameFromBotID(order.getBotID(), connectionPool);
-                bottomNames.put(order.getOrderID(), cakeBot.getBottom());
+                bottomNames.put(order.getBotID(), cakeBot.getBottom());
             }
             if(!toppingNames.containsKey(order.getTopID())) {
                 CupcakeTop cakeTop = BasketMapper.getNameFromTopID(order.getTopID(), connectionPool);
@@ -38,7 +39,7 @@ public class BasketController {
             }
         }
 
-
+        
         ctx.render("basket.html", Map.of("orders", orders, "bottomNames", bottomNames, "toppingNames", toppingNames, "totalPrice", totalPrice));
     }
 }

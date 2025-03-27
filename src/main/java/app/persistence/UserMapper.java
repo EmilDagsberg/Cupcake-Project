@@ -34,6 +34,26 @@ public class UserMapper {
         }
     }
 
+    public static void createUser(String mail, String password, ConnectionPool connectionPool) throws DatabaseException {
+        String sql = "insert into users (mail, password) values (?,?)";
 
+        try(    Connection connection = connectionPool.getConnection();
+                PreparedStatement ps = connection.prepareStatement(sql)
+        )
+        {
+            ps.setString(1, mail);
+            ps.setString(2, password);
 
+            int rowsAffected = ps.executeUpdate();
+            if (rowsAffected != 1)   {
+                throw new DatabaseException("Fejl ved oprettelse af ny bruger");
+            }
+        } catch (SQLException e)  {
+            String msg = "Der er sket en fejl. Prøv igen";
+            if (e.getMessage().startsWith("ERROR: duplicate key value "))   {
+                msg = "Mail findes allerede.";
+            }
+            throw new DatabaseException(msg, e.getMessage());
+        }
+    }
 }
