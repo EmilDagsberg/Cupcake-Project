@@ -42,7 +42,6 @@ public void handleOrder(Context ctx) throws DatabaseException {
     ctx.sessionAttribute("orders", orders);
 
 
-    OrderDetails orderDetails = new OrderDetails(cakeTop.getTopID(), cakeBot.getBotID(), quantity, totalPrice);
 
     ctx.render("order.html");
 
