@@ -13,11 +13,6 @@
     </a>
 </header>
 
-<p>Ordrer</p>
-<p>Kunder</p>
-<!--<p><span th:text="${session.currentUser.mail}"></span></p>-->
-<img alt="basketLogo" src="../public/images/basketIcon.png" th:src="@{/images/basketIcon.png}"/>
-
 <h1>Velkommen ombord</h1>
 <h2>Øens bedste cupcakes. Vælg og bestil her:</h2>
 
@@ -27,7 +22,7 @@
             <option value="" selected disabled>Vælg bund</option>
             <option value="Chocolate">Chokolade  |  5.00 kr</option>
             <option value="Vanilla">Vanilje  |  5.00 kr</option>
-            <option value="Nutmeg">Muskatnød  | 5.00 kr</option>
+            <option value="Nutmeg">Muskatnød  |  5.00 kr</option>
             <option value="Pistacio">Pistacie  |  6.00 kr</option>
             <option value="Almond">Mandel  |  7.00 kr</option>
         </select>
@@ -48,9 +43,12 @@
         <input type="number" id="quantity" name="quantity" min="1" placeholder="Vælg antal">
 
         <button type="submit">Læg i kurv</button>
-
     </div>
+</form>
 
+<!-- Button to go to Basket -->
+<form action="/basket" method="GET">
+    <button type="submit">Gå til kurv</button>
 </form>
 
 </body>

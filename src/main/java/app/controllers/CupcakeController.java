@@ -30,8 +30,20 @@ public void handleOrder(Context ctx) throws DatabaseException {
 
     OrderDetails orderDetails = new OrderDetails(cakeTop.getTopID(), cakeBot.getBotID(), quantity, totalPrice);
 
-    ctx.render("order.html");
 
+    List<OrderDetails> orders = ctx.sessionAttribute("orders");
+    if (orders == null) {
+        orders = new ArrayList<>();
+    }
+    // Add the new order to the existing orders list
+    orders.add(orderDetails);
+
+    // Store the updated orders list back in the session
+    ctx.sessionAttribute("orders", orders);
+
+
+
+    ctx.render("order.html");
 
 }
 
