@@ -56,4 +56,26 @@ public class UserMapper {
             throw new DatabaseException(msg, e.getMessage());
         }
     }
+
+    public static void updateMail(String mail, int userId, ConnectionPool connectionPool) throws DatabaseException {
+        String sql ="update users set mail = ? where user_id = ?";
+
+        try (
+                Connection connection = connectionPool.getConnection();
+                PreparedStatement ps = connection.prepareStatement(sql)
+        )
+        {
+            ps.setString(1, mail);
+            ps.setInt(2, userId);
+            int rowsAffected = ps.executeUpdate();
+            if (rowsAffected != 1)
+            {
+                throw new DatabaseException("Fejl i opdatering af mail");
+            }
+        }
+        catch (SQLException e)
+        {
+            throw new DatabaseException("Fejl i opdatering mail", e.getMessage());
+        }
+    }
 }
