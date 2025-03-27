@@ -42,4 +42,17 @@ public class BasketController {
         
         ctx.render("basket.html", Map.of("orders", orders, "bottomNames", bottomNames, "toppingNames", toppingNames, "totalPrice", totalPrice));
     }
+
+    public void removeItem(Context ctx){
+        int botID = Integer.parseInt(ctx.formParam("botID"));
+        int topID = Integer.parseInt(ctx.formParam("topID"));
+
+        List<OrderDetails> orders = ctx.sessionAttribute("orders");
+
+        if (orders != null){
+            orders.removeIf(order -> order.getBotID() == botID && order.getTopID() == topID);
+            ctx.sessionAttribute("orders", orders);
+        }
+        ctx.redirect("/basket");
+    }
 }
