@@ -43,5 +43,22 @@ public class UserController {
         ctx.redirect("/");
     }
 
+    private static void createAccount(Context ctx, ConnectionPool connectionPool) {
+        String mail = ctx.formParam("mail");
+        String password1 = ctx.formParam("password1");
+        String password2 = ctx.formParam("password2");
+
+        if (password1.equals(password2))    {
+            try {
+                UserMapper.createAccount(mail, password1, password2);
+                ctx.attribute("message", "Konto oprettet: " + mail + ". Venligst login");
+                ctx.render("login.html");
+            } catch (DatabaseException e)   {
+                ctx.attribute("message", "Passwords matcher ikke. prøv igen");
+                ctx.render("createuser.html");
+            }
+        }
+    }
+
 
 }
