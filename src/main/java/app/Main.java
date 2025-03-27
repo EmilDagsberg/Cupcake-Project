@@ -2,6 +2,7 @@ package app;
 
 import app.config.SessionConfig;
 import app.config.ThymeleafConfig;
+import app.controllers.BasketController;
 import app.controllers.CupcakeController;
 import app.controllers.UserController;
 import app.persistence.ConnectionPool;
@@ -24,6 +25,8 @@ public class Main {
     private static final ConnectionPool connectionPool = ConnectionPool.getInstance(USER, PASSWORD, URL, DB);
 
     private static final CupcakeController cupcakeController = new CupcakeController(connectionPool);
+    private static final BasketController basketController = new BasketController(connectionPool);
+
 
     public static void main(String[] args)
     {
@@ -41,11 +44,13 @@ public class Main {
         UserController.addRoutes(app, connectionPool);
 
         app.get("/", ctx -> ctx.render("index.html"));
-        app.get("order", ctx -> ctx.render("order.html"));
+        app.get("/order", ctx -> ctx.render("order.html"));
         app.post("/order", ctx -> cupcakeController.handleOrder(ctx));
-        app.get("basket", ctx -> ctx.render("basket.html"));
+        app.get("/basket", ctx -> basketController.showBasket(ctx));
+
+
+        //app.post("/basket", ctx -> basketController.showBasket(ctx));
 
     }
-
 
 }

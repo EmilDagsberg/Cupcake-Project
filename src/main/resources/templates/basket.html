@@ -15,29 +15,37 @@
 
 <p>Ordrer</p>
 <p>Kunder</p>
-<!--<p><span th:text="${session.currentUser.mail}"></span></p>-->
 <img alt="basketLogo" src="../public/images/basketIcon.png" th:src="@{/images/basketIcon.png}"/>
 
-<div class="basket">
-<div th:if="${paymentStatus == false}">
+
+<div th:if="${orders != null && !orders.isEmpty()}">
     <div id="order-list">
         <ul>
             <li th:each="order : ${orders}">
-                <span th:text="${order.quantity} + 'x ' + ${order.bottom} + ' & ' + ${order.topping}"></span>
-                <span>$<span th:text="${order.totalPrice}"></span></span>
+                <span th:text="${order.quantity} + 'x ' + ${bottomNames[order.botID]} + ' & ' + ${toppingNames[order.topID]}"></span>
+                <span> - <span th:text="${order.totalPrice}"></span> kr</span>
             </li>
         </ul>
     </div>
     <div class="total">
         Total: <span th:text="${totalPrice}">0.00</span> kr
     </div>
-        <button type="submit">Betal nu</button>
-    </div>
 
-    <div th:if="@{paymentStatus == true}">
-        <p>Tak for din order!</p>
-        <p>Dine ordre er betalt og registreret</p>
-        <p>Du kan nu hente din ordre i vores butik</p>
-    </div>
+    <form action="/basket" method="POST">
+        <button type="submit">Betal nu</button>
+    </form>
 </div>
+
+
+<div th:if="${orders == null || orders.isEmpty()}">
+    <p>Din kurv er tom.</p>
+</div>
+
+
+<form action="/order" method="GET">
+    <button type="submit">Fortsæt med at bestille</button>
+</form>
+
 </body>
+</html>
+
