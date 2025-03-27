@@ -50,7 +50,7 @@ public class UserController {
 
         if (password1.equals(password2))    {
             try {
-                UserMapper.createAccount(mail, password1, password2);
+                UserMapper.createAccount(mail, password1, connectionPool);
                 ctx.attribute("message", "Konto oprettet: " + mail + ". Venligst login");
                 ctx.render("login.html");
             } catch (DatabaseException e)   {
