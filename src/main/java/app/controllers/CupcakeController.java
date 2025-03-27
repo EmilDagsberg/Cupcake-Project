@@ -9,6 +9,9 @@ import app.persistence.CupcakeBotMapper;
 import app.persistence.CupcakeTopMapper;
 import io.javalin.http.Context;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class CupcakeController {
     private static ConnectionPool connectionPool;
 
