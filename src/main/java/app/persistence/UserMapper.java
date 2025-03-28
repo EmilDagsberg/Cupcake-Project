@@ -8,6 +8,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UserMapper {
     public static User login(String mail, String password, ConnectionPool connectionPool) throws DatabaseException {
@@ -100,5 +102,24 @@ public class UserMapper {
         {
             throw new DatabaseException("Fejl i opdatering password", e.getMessage());
         }
+    }
+
+    public static List<User> getAllUsers(ConnectionPool connectionPool) throws DatabaseException {
+        String sql = "select * from users";
+        List<User> users = new ArrayList<>();
+
+        try (Connection connection = connectionPool.getConnection();
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery())
+        {
+            while (rs.next()){
+                String mail = rs.getString("mail");
+                users.add(new User(mail));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return users;
     }
 }

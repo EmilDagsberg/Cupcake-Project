@@ -2,9 +2,21 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>ADMIN AREA</title>
 </head>
 <body>
-
+<h1>ADMIN AREA</h1>
+    <table border="1">
+        <thead>
+        <tr>
+            <th>Email</th>
+        </tr>
+        </thead>
+        <tbody>
+            <tr th:each="user : ${users}">
+                <td th:text="${user.mail}"></td>
+            </tr>
+        </tbody>
+    </table>
 </body>
 </html>

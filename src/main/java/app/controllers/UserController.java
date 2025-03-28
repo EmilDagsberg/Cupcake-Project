@@ -7,6 +7,8 @@ import app.persistence.UserMapper;
 import io.javalin.Javalin;
 import io.javalin.http.Context;
 
+import java.util.List;
+
 public class UserController {
 
     public static void addRoutes(Javalin app, ConnectionPool connectionPool)    {
@@ -18,6 +20,7 @@ public class UserController {
         app.get("profile", ctx -> ctx.render("profile.html"));
         app.post("updateMail", ctx -> updateMail(ctx, connectionPool));
         app.post("updatePassword", ctx -> updatePassword(ctx, connectionPool));
+        app.get("/admin", ctx -> UserController.getAllUsers(ctx, connectionPool));
     }
 
 
@@ -105,6 +108,17 @@ public class UserController {
                 ctx.render("index.html");
             }
         }
+    }
+
+    public static void getAllUsers(Context ctx, ConnectionPool connectionPool){
+        try {
+            List<User> users = UserMapper.getAllUsers(connectionPool);
+            ctx.attribute("users", users);
+            ctx.render("admin.html");
+        } catch (DatabaseException e) {
+            ctx.attribute(e.getMessage());
+        }
+
     }
 
 }
