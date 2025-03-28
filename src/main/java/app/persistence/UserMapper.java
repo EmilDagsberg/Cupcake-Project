@@ -48,6 +48,7 @@ public class UserMapper {
             if (rowsAffected != 1)   {
                 throw new DatabaseException("Fejl ved oprettelse af ny bruger");
             }
+
         } catch (SQLException e)  {
             String msg = "Der er sket en fejl. Prøv igen";
             if (e.getMessage().startsWith("ERROR: duplicate key value "))   {
@@ -57,5 +58,47 @@ public class UserMapper {
         }
     }
 
+    public static void updateMail(String mail, int userId, ConnectionPool connectionPool) throws DatabaseException {
+        String sql ="update users set mail = ? where user_id = ?";
 
+        try (
+                Connection connection = connectionPool.getConnection();
+                PreparedStatement ps = connection.prepareStatement(sql)
+        )
+        {
+            ps.setString(1, mail);
+            ps.setInt(2, userId);
+            int rowsAffected = ps.executeUpdate();
+            if (rowsAffected != 1)
+            {
+                throw new DatabaseException("Fejl i opdatering af mail");
+            }
+        }
+        catch (SQLException e)
+        {
+            throw new DatabaseException("Fejl i opdatering mail", e.getMessage());
+        }
+    }
+
+    public static void updatePassword(String password, int userId, ConnectionPool connectionPool) throws DatabaseException {
+        String sql ="update users set password = ? where user_id = ?";
+
+        try (
+                Connection connection = connectionPool.getConnection();
+                PreparedStatement ps = connection.prepareStatement(sql)
+        )
+        {
+            ps.setString(1, password);
+            ps.setInt(2, userId);
+            int rowsAffected = ps.executeUpdate();
+            if (rowsAffected != 1)
+            {
+                throw new DatabaseException("Fejl i opdatering af password");
+            }
+        }
+        catch (SQLException e)
+        {
+            throw new DatabaseException("Fejl i opdatering password", e.getMessage());
+        }
+    }
 }
