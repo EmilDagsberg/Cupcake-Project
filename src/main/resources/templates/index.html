@@ -16,7 +16,7 @@
     <a href="profile.html" th:href="@{/profile}">Profile</a>
 </div>
 
-<form action="/order" method="GET">
+<form th:action="${session.currentUser != null} ? '/order' : '/login'" method="GET">
     <button type="submit">Bestil her</button>
 </form>
 

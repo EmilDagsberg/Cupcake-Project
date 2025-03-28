@@ -61,6 +61,17 @@ public class BasketController {
         {
             removeAmount(ctx, userAmount);
 
+            BasketMapper.addOrderHistory(userID, connectionPool);
+
+            int order_id = BasketMapper.getOrderHistoryID(userID, connectionPool);
+
+            List<OrderDetails> orders = ctx.sessionAttribute("orders");
+
+            for (OrderDetails order : orders) {
+                BasketMapper.addOrderDetails(order_id, order.getTopID(), order.getBotID(), order.getQuantity(), order.getTotalPrice(), connectionPool);
+            }
+
+
             boolean paid = true;
 
             ctx.attribute("paymentStatus", paid);

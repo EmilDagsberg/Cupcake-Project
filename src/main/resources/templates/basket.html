@@ -20,7 +20,7 @@
     <div id="order-list">
         <ul>
             <li th:each="order : ${orders}">
-                <span th:text="${order.quantity} + 'x ' + ${bottomNames[order.botID]} + ' & ' + ${toppingNames[order.topID]}"></span>
+                <span th:text="${order.quantity} + 'x Cupcakes: ' + ${bottomNames[order.botID]} + ' bund & ' + ${toppingNames[order.topID]} + ' top'"></span>
                 <span> - <span th:text="${order.totalPrice}"></span> kr</span>
 
                 <!-- Remove button -->
