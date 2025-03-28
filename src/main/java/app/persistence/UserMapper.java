@@ -1,5 +1,6 @@
 package app.persistence;
 
+import app.entities.OrderHistory;
 import app.entities.User;
 
 import app.exceptions.DatabaseException;
@@ -122,4 +123,6 @@ public class UserMapper {
 
         return users;
     }
+
+
 }

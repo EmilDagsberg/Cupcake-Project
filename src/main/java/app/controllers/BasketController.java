@@ -12,6 +12,7 @@ import io.javalin.http.Context;
 import org.jetbrains.annotations.NotNull;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -78,15 +79,6 @@ public class BasketController {
 
             ctx.render("/basket");
         }
-
-
-
-
-
-
-
-
-
     }
 
     public void removeAmount(Context ctx, double userAmount) throws SQLException {

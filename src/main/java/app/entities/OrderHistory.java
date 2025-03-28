@@ -7,10 +7,17 @@ public class OrderHistory {
     int userID;
     LocalDateTime date;
 
-    public OrderHistory(int orderID ,int userID){
+    public OrderHistory(int orderID ,int userID, LocalDateTime date) {
         this.orderID = orderID;
         this.userID = userID;
+        this.date = date;
     }
+
+    public OrderHistory(int orderId, int userID) {
+        this.orderID = orderId;
+        this.userID = userID;
+    }
+
 
     public int getOrderID() {
         return orderID;

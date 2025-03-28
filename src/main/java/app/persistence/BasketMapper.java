@@ -110,7 +110,7 @@ public class BasketMapper {
     }
 
     public static int getOrderHistoryID(int user_id, ConnectionPool connectionPool) throws SQLException {
-        String sql = "SELECT * FROM order_history WHERE user_id = ? ORDER BY order_id LIMIT 1";
+        String sql = "SELECT * FROM order_history WHERE user_id = ? ORDER BY order_id DESC LIMIT 1";
 
         try (Connection conn = connectionPool.getConnection();
         PreparedStatement stmt = conn.prepareStatement(sql)) {
