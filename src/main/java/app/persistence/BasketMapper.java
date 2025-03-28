@@ -93,6 +93,57 @@ public class BasketMapper {
         }
     }
 
+    public static void addOrderHistory(int user_id, ConnectionPool connectionPool) throws SQLException {
+        String sql = "INSERT INTO order_history (user_id, date) VALUES (?, ?)";
+
+        try (Connection conn = connectionPool.getConnection();
+        PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, (user_id));
+            stmt.setDate(2, new java.sql.Date(new java.util.Date().getTime()));
+
+            stmt.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static int getOrderHistoryID(int user_id, ConnectionPool connectionPool) throws SQLException {
+        String sql = "SELECT * FROM order_history WHERE user_id = ? ORDER BY order_id LIMIT 1";
+
+        try (Connection conn = connectionPool.getConnection();
+        PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, (user_id));
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return rs.getInt("order_id");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return -1;
+    }
+
+    public static void addOrderDetails(int order_id, int top, int bottom, int quantity, double totalPrice, ConnectionPool connectionPool) throws SQLException {
+        String sql = "INSERT INTO order_details (order_id, top, bottom, quantity, total_price) VALUES (?, ?, ?, ?, ?)";
+
+        try (Connection conn = connectionPool.getConnection();
+        PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, order_id);
+            stmt.setInt(2, top);
+            stmt.setInt(3, bottom);
+            stmt.setInt(4, quantity);
+            stmt.setDouble(5, totalPrice);
+
+            stmt.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
 
 
