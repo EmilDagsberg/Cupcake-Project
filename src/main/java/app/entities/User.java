@@ -15,6 +15,10 @@ public class User {
         this.role = role;
     }
 
+    public User(String mail){
+        this.mail = mail;
+    }
+
     public int getUserID() {
         return userID;
     }
