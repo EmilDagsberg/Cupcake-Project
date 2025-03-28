@@ -14,10 +14,6 @@ header {
     text-align: center;
 }
 
-.logo-container img {
-    width: 200px;
-}
-
 /* Page Container */
 .container {
     background: white;

@@ -15,8 +15,6 @@
 
 <p>Ordrer</p>
 <p>Kunder</p>
-<img alt="basketLogo" src="../public/images/basketIcon.png" th:src="@{/images/basketIcon.png}"/>
-
 <div th:if="${paymentStatus != true}">
 <div th:if="${orders != null && !orders.isEmpty()}">
     <div id="order-list">
