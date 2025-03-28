@@ -20,13 +20,13 @@
             <td>Mail:</td>
             <td th:text="${session.currentUser.mail}"></td>
             <td><input type="text" name="mail" placeholder="New mail address here" ></td>
-            <td><button type="submit" name="profileinfo" th:value="${session.currentUser.mail}" formaction="updateInfo">Edit</button></td>
+            <td><button type="submit" name="profilemail" th:value="${session.currentUser.mail}" formaction="updateMail">Update</button></td>
         </tr>
         <tr>
             <td>Password:</td>
             <td th:text="${session.currentUser.password}"></td>
             <td><input type="text" name="password" placeholder="New password here"></td>
-            <td><button type="submit" name="profileinfo" th:value="${session.currentUser.password}" formaction="">Edit</button></td>
+            <td><button type="submit" name="profilepassword" th:value="${session.currentUser.password}" formaction="updatePassword">Update</button></td>
         </tr>
     </table>
 

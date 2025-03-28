@@ -7,8 +7,6 @@ import app.persistence.UserMapper;
 import io.javalin.Javalin;
 import io.javalin.http.Context;
 
-import java.util.List;
-
 public class UserController {
 
     public static void addRoutes(Javalin app, ConnectionPool connectionPool)    {
@@ -18,7 +16,8 @@ public class UserController {
         app.get("createuser", ctx -> ctx.render("createuser.html"));
         app.post("createuser", ctx -> createUser(ctx, connectionPool));
         app.get("profile", ctx -> ctx.render("profile.html"));
-        app.post("updateInfo", ctx -> updateInfo(ctx, connectionPool));
+        app.post("updateMail", ctx -> updateMail(ctx, connectionPool));
+        app.post("updatePassword", ctx -> updatePassword(ctx, connectionPool));
     }
 
 
@@ -64,7 +63,7 @@ public class UserController {
         }
     }
 
-    private static void updateInfo(Context ctx, ConnectionPool connectionPool)  {
+    private static void updateMail(Context ctx, ConnectionPool connectionPool)  {
         String mail = ctx.formParam("mail");
         User user = ctx.sessionAttribute("currentUser");
 
@@ -76,6 +75,28 @@ public class UserController {
                 ctx.sessionAttribute("currentUser", user);
 
                 ctx.attribute("message", "Mail er ændret");
+                ctx.render("profile.html");
+
+
+            } catch (DatabaseException e) {
+                ctx.attribute("message", e.getMessage());
+                ctx.render("index.html");
+            }
+        }
+    }
+
+    private static void updatePassword(Context ctx, ConnectionPool connectionPool)  {
+        String password = ctx.formParam("password");
+        User user = ctx.sessionAttribute("currentUser");
+
+        if(user != null) {
+            try {
+                UserMapper.updatePassword(password, user.getUserID(), connectionPool);
+
+                user.setPassword(password);
+                ctx.sessionAttribute("currentUser", user);
+
+                ctx.attribute("message", "password er ændret");
                 ctx.render("profile.html");
 
 
