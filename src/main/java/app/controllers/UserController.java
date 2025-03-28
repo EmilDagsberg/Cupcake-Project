@@ -20,6 +20,7 @@ public class UserController {
         app.get("profile", ctx -> ctx.render("profile.html"));
         app.post("updateMail", ctx -> updateMail(ctx, connectionPool));
         app.post("updatePassword", ctx -> updatePassword(ctx, connectionPool));
+        app.get("index", ctx -> ctx.render("index.html"));
         app.get("/admin", ctx -> UserController.getAllUsers(ctx, connectionPool));
     }
 
