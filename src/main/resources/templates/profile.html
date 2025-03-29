@@ -14,9 +14,15 @@
 
     <table>
         <tr>
-            <td>Current balance:</td>
+            <td>Nuværende saldo:</td>
             <td th:text="${session.currentUser.amount}"></td>
             <td>DKK.</td>
+        </tr>
+        <tr>
+            <td>
+                <input type="number" name="amount" placeholder="Tilføj beløb">
+                <button type="submit" formaction="addMoney">Tilføj beløb til konto</button>
+            </td>
         </tr>
         <tr>
             <td>Mail:</td>

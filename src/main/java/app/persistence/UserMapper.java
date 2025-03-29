@@ -125,4 +125,17 @@ public class UserMapper {
     }
 
 
+    public static void updateAmount( double amount, String mail, ConnectionPool connectionPool) throws DatabaseException {
+        String sql = "UPDATE users SET amount = ? WHERE mail = ?";
+
+        try (Connection connection = connectionPool.getConnection();
+        PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setDouble(1, (amount));
+            stmt.setString(2, mail);
+
+            stmt.executeUpdate();
+
+    } catch (SQLException e) {
+        throw new RuntimeException(e);}
+    }
 }
