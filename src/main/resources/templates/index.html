@@ -8,7 +8,6 @@
 </head>
 <body>
 
-<p th:text="${message}"></p>
 <div class="generic-style">
     <a href="index.html" th:href="@{/}">
         <img alt="logo" src="../public/images/cupcakelogo.png" th:src="@{/images/cupcakelogo.png}"/>
@@ -17,10 +16,30 @@
 <ul>
     <li><a href="default.asp">Hjem</a></li>
     <li th:action="${session.currentUser != null} ? '/order' : '/login'" method="GET">
-        <a type="submit">Bestil her</a>
+        <a href="order.html" th:href="@{/order}">Bestil her</a>
     </li>
-    <li style="float:right"><a href="login.html" th:href="@{/login}" class="login">Login</a></li>
+
+
+    <li class="dropdown">
+        <a href="javascript:void(0)" class="dropbtn">Dropdown</a>
+        <div class="dropdown-content">
+            <a href="#">Link 1</a>
+            <a href="#">Link 2</a>
+            <a href="#">Link 3</a>
+        </div>
+    </li>
+
+
+    <li style="float:right"><a href="login.html" th:href="@{/login}" class="active">Login</a></li>
     <li style="float:right" ><a class="active" href="admin.html">Admin</a></li>
+
+    <li style="float:right" class="dropdown">
+        <a th:text="${session.currentUser.mail}" class="dropbtn"></a>
+        <div class="dropdown-content" th:if="${session.currentUser != null}">
+            <a href="login.html" th:href="@{/logout}">Logout</a>
+            <a href="profile.html" th:href="@{/profile}">Profile</a>
+        </div>
+    </li>
 </ul>
 
 <div class="container">
