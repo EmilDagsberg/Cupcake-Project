@@ -6,6 +6,7 @@ import app.persistence.ConnectionPool;
 import app.persistence.UserMapper;
 import io.javalin.Javalin;
 import io.javalin.http.Context;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
@@ -20,7 +21,36 @@ public class UserController {
         app.get("profile", ctx -> ctx.render("profile.html"));
         app.post("updateMail", ctx -> updateMail(ctx, connectionPool));
         app.post("updatePassword", ctx -> updatePassword(ctx, connectionPool));
+        app.post("addMoney", ctx -> updateAmount(ctx, connectionPool));
         app.get("index", ctx -> ctx.render("index.html"));
+
+
+    }
+
+    private static void updateAmount(Context ctx, ConnectionPool connectionPool) {
+        int amount = Integer.parseInt(ctx.formParam("amount"));
+
+        if (amount < 0) {
+            ctx.attribute("message", "Sorry, but you can't add a negative number to your account");
+        } else {
+
+            User user = ctx.sessionAttribute("currentUser");
+
+            try {
+                UserMapper.updateAmount(user.getAmount() + amount, user.getMail(), connectionPool);
+                ctx.attribute("message", "Dit beløb er blevet opdateret");
+                user.setAmount(user.getAmount() + amount);
+                ctx.render("profile.html");
+
+            } catch (DatabaseException e) {
+                ctx.attribute("message", e.getMessage());
+                ctx.render("profile.html");
+            }
+
+
+        }
+
+
 
     }
 
