@@ -1,14 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <title>Order</title>
     <meta charset="UTF-8">
-    <title>Index</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="../public/css/styles.css" th:href="@{/css/styles.css}" rel="stylesheet"/>
 </head>
 <body>
 
-<p><a href="login.html" th:href="@{/login}">Login</a></p>
-
 <p th:text="${message}"></p>
+<div class="generic-style">
+    <a href="index.html" th:href="@{/}">
+        <img alt="logo" src="../public/images/cupcakelogo.png" th:src="@{/images/cupcakelogo.png}"/>
+    </a>
+</div>
+<ul>
+    <li><a href="default.asp">Hjem</a></li>
+    <li th:action="${session.currentUser != null} ? '/order' : '/login'" method="GET">
+        <a type="submit">Bestil her</a>
+    </li>
+    <li style="float:right"><a href="login.html" th:href="@{/login}" class="login">Login</a></li>
+    <li style="float:right" ><a class="active" href="admin.html">Admin</a></li>
+</ul>
+
+<div class="container">
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin malesuada sed massa aliquam suscipit. Nullam nisi velit, placerat at suscipit sit amet, imperdiet eget ligula. Aenean eleifend elit consectetur, suscipit erat in, egestas tortor. Nulla congue, purus et pulvinar dignissim, nisi turpis rhoncus est, eget consectetur leo lacus ac tortor. Vivamus molestie risus non metus maximus ullamcorper. Proin facilisis urna sed orci dictum hendrerit. Duis in sapien porta, tincidunt nisl vel, hendrerit magna. Quisque eleifend ex lectus, nec accumsan nisl venenatis sed. Maecenas suscipit, velit sit amet dapibus ullamcorper, mi mauris sodales est, vitae iaculis tortor enim in arcu. Sed quis libero aliquet, vehicula neque vel, vestibulum ante. Aenean volutpat eros lacus, ac viverra magna fermentum et. Integer accumsan at enim et egestas.
+
+    Ut interdum est vel placerat iaculis. Vestibulum vel feugiat urna. Cras at lacinia est. Donec venenatis viverra ipsum sed mollis. Morbi vel nulla ac magna dictum imperdiet sed eget urna. Aenean sit amet ultrices elit. Maecenas ligula leo, commodo ac iaculis et, commodo quis urna. Mauris facilisis eleifend sapien, faucibus venenatis magna malesuada quis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; In vel dolor vulputate, tincidunt magna a, pulvinar odio. Ut in turpis in massa venenatis commodo. Aenean justo ex, rhoncus id lacus eu, vestibulum lacinia nulla. Maecenas pharetra ultrices commodo. Quisque consectetur ut ex ac ultrices. Aenean a ante et dolor porta ornare et nec turpis. Cras eget venenatis est, nec convallis magna.</p>
+
+</div>
+
+<ul class="cupcakes1">
+    <li><img alt="cupcakePic" src="../public/images/rasberry.png" th:src="@{/images/rasberry.png}"/></li>
+    <li><img alt="cupcakePic" src="../public/images/blueberry.png" th:src="@{/images/blueberry.png}"/></li>
+    <li><img alt="cupcakePic" src="../public/images/chocolate.png" th:src="@{/images/chocolate.png}"/></li>
+</ul>
+
+<ul class="cupcakes2">
+    <li><img alt="cupcakePic" src="../public/images/orange.png" th:src="@{/images/orange.png}"/></li>
+    <li><img alt="cupcakePic" src="../public/images/strawberry.png" th:src="@{/images/strawberry.png}"/></li>
+</ul>
 
 <div th:if="${session.currentUser != null}">
     <span th:text="${session.currentUser.mail}"></span> |
@@ -16,9 +47,11 @@
     <a href="profile.html" th:href="@{/profile}">Profile</a>
 </div>
 
-<form th:action="${session.currentUser != null} ? '/order' : '/login'" method="GET">
-    <button type="submit">Bestil her</button>
-</form>
+
+
+
+
+
 
 </body>
 </html>

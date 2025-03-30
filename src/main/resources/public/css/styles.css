@@ -8,23 +8,70 @@ body {
 }
 
 /****** Header ******/
-header {
+.generic-style {
     background-color: #3A1561;
-    padding: 20px;
+    top: 0;
+    margin: auto;
+    width: 1400px;
+    height: 20%;
+    min-height: 100px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.generic-style img  {
+    width: auto;
+    height: auto;
+    display: block;
+    margin: auto;
+}
+
+ /****** Navbox ******/
+
+ul {
+    list-style-type: none;
+    margin: auto;
+    padding: 0;
+    width: 1400px;
+    overflow: hidden;
+    background-color: #333;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+li {
+    float: left;
+}
+
+li a {
+    display: block;
+    color: white;
     text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+li a:hover:not(.active) {
+    background-color: #111;
+}
+
+.active {
+    background-color: #04AA6D;
+}
+
+.login {
+    background-color: #3A1561;
 }
 
 /* Page Container */
 .container {
     background: white;
-    max-width: 600px;
-    margin: 30px auto;
-    padding: 20px;
-    border-radius: 10px;
+    width: 1400px;
+    margin: auto;
+    padding-top: 10px;
+    padding-bottom: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Headings */
+/* Text styles */
 h1 {
     font-size: 50px;
     color: black;
@@ -33,6 +80,10 @@ h1 {
 h2 {
     font-size: 25px;
     color: black;
+}
+
+p   {
+    padding: 10px;
 }
 
 /****** Form Styling *******/
@@ -51,6 +102,18 @@ select, input {
 .quantity-box {
     width: 94%;
     padding-left: 20px;
+}
+
+/******* Cupcake pics styles ******/
+.cupcakes1, .cupcakes2 {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    gap: 10px;
+    margin: 10px auto;
+    background-color: white;
+    justify-content: center;
+    allign-items: center;
 }
 
 /******* Buttons *********/
