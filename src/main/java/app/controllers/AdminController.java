@@ -14,6 +14,8 @@ import java.util.List;
 
 public class AdminController {
 
+    public AdminController(ConnectionPool connectionPool) {}
+
     public static void addRoutes(Javalin app, ConnectionPool connectionPool)    {
         app.get("/admin", ctx -> UserController.getAllUsers(ctx, connectionPool));
     }
