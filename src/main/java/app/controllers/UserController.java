@@ -180,8 +180,8 @@ public class UserController {
         List<OrderDetails> details = OrderDetailsMapper.getOrderDetailsFromUser(orderId, connectionPool);
 
         for(OrderDetails detail : details) {
-            CupcakeBot bot = BasketMapper.getNameFromBotID(detail.getBotID(), connectionPool);
-            CupcakeTop top = BasketMapper.getNameFromTopID(detail.getTopID(), connectionPool);
+            CupcakeBot bot = CupcakeBotMapper.getNameFromBotID(detail.getBotID(), connectionPool);
+            CupcakeTop top = CupcakeTopMapper.getNameFromTopID(detail.getTopID(), connectionPool);
 
             detail.setBotName(bot.getBottom());
             detail.setTopName(top.getTopping());

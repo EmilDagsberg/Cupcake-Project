@@ -39,4 +39,25 @@ public class OrderDetailsMapper {
         }
 
     }
+
+
+    public static void addOrderDetails(int order_id, int top, int bottom, int quantity, double totalPrice, ConnectionPool connectionPool) throws SQLException {
+        String sql = "INSERT INTO order_details (order_id, top, bottom, quantity, total_price) VALUES (?, ?, ?, ?, ?)";
+
+        try (Connection conn = connectionPool.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, order_id);
+            stmt.setInt(2, top);
+            stmt.setInt(3, bottom);
+            stmt.setInt(4, quantity);
+            stmt.setDouble(5, totalPrice);
+
+            stmt.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

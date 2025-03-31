@@ -138,4 +138,21 @@ public class UserMapper {
     } catch (SQLException e) {
         throw new RuntimeException(e);}
     }
+
+    public static double getAmountFromUserId(int user_id, ConnectionPool connectionPool) throws SQLException {
+        String sql = "SELECT * FROM users WHERE user_id = ?";
+        try (Connection conn = connectionPool.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, (user_id));
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                return rs.getDouble("amount");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0.00;
+    }
+
 }
