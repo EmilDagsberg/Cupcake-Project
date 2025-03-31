@@ -1,11 +1,14 @@
 package app.entities;
 
+import java.util.List;
+
 public class User {
     int userID;
     String mail;
     String password;
     double amount;
     boolean role;
+    List<OrderHistory> orders;
 
     public User(int userID, String mail, String password, double amount, boolean role) {
         this.userID = userID;
@@ -57,5 +60,13 @@ public class User {
 
     public void setRole(boolean role) {
         this.role = role;
+    }
+
+    public List<OrderHistory> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<OrderHistory> orders) {
+        this.orders = orders;
     }
 }

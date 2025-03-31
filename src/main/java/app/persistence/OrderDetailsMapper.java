@@ -11,11 +11,11 @@ import java.util.List;
 
 public class OrderDetailsMapper {
 
-    public static OrderDetails getOrderDetailsFromUser(int order_id, ConnectionPool connectionPool) {
+    public static List<OrderDetails> getOrderDetailsFromUser(int order_id, ConnectionPool connectionPool) {
         List<OrderDetails> orderDetails = new ArrayList<>();
         String sql = "SELECT id, order_details.order_id, top, bottom, quantity, total_price FROM order_details " +
                 "JOIN order_history ON order_details.order_id=order_history.order_id " +
-                "WHERE order_details.order_id==?";
+                "WHERE order_details.order_id=?";
 
         try (Connection conn = connectionPool.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -33,7 +33,7 @@ public class OrderDetailsMapper {
                         rs.getInt("id")));
 
             }
-            return (OrderDetails) orderDetails;
+            return orderDetails;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

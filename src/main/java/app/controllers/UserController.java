@@ -1,8 +1,12 @@
 package app.controllers;
 
+import app.entities.OrderDetails;
+import app.entities.OrderHistory;
 import app.entities.User;
 import app.exceptions.DatabaseException;
 import app.persistence.ConnectionPool;
+import app.persistence.OrderDetailsMapper;
+import app.persistence.OrderHistoryMapper;
 import app.persistence.UserMapper;
 import io.javalin.Javalin;
 import io.javalin.http.Context;
@@ -18,11 +22,15 @@ public class UserController {
         app.get("logout", ctx -> logout(ctx));
         app.get("createuser", ctx -> ctx.render("createuser.html"));
         app.post("createuser", ctx -> createUser(ctx, connectionPool));
-        app.get("profile", ctx -> ctx.render("profile.html"));
+        app.get("profile", ctx -> {
+            orderHistory(ctx, connectionPool);
+        });
         app.post("updateMail", ctx -> updateMail(ctx, connectionPool));
         app.post("updatePassword", ctx -> updatePassword(ctx, connectionPool));
         app.post("addMoney", ctx -> updateAmount(ctx, connectionPool));
+        app.get("/orderDetails", ctx -> orderDetails(ctx, connectionPool));
         app.get("index", ctx -> ctx.render("index.html"));
+
 
 
     }
@@ -151,5 +159,33 @@ public class UserController {
         }
 
     }
+
+    public static void orderHistory(Context ctx, ConnectionPool connectionPool) {
+        User user = ctx.sessionAttribute("currentUser");
+        if (user != null) {
+            try {
+                List<OrderHistory> orders = OrderHistoryMapper.getAllOrderHistoryByMail(user.getMail(), connectionPool);
+                user.setOrders(orders);
+                ctx.sessionAttribute("currentUser", user);
+
+
+                ctx.render("profile.html");
+            } catch (DatabaseException e) {
+                ctx.attribute("message", "Error loading orders.");
+                ctx.render("profile.html");
+            }
+        } else {
+            ctx.redirect("login");
+        }
+    }
+
+    public static void orderDetails(Context ctx, ConnectionPool connectionPool) {
+        int orderId = Integer.parseInt(ctx.queryParam("orderId"));
+        List<OrderDetails> details = OrderDetailsMapper.getOrderDetailsFromUser(orderId, connectionPool);
+        ctx.attribute("orderDetails", details);
+        ctx.render("orderDetails.html");
+    }
+
+
 
 }
