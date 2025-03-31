@@ -7,11 +7,38 @@
 </head>
 <body>
 
+<div class="generic-style">
+    <a href="index.html" th:href="@{/}">
+        <img alt="logo" src="../public/images/cupcakelogo.png" th:src="@{/images/cupcakelogo.png}"/>
+    </a>
+</div>
+<ul>
+    <li><a href="index.html" th:href="@{/}">Hjem</a></li>
+    <li th:action="${session.currentUser != null} ? '/order' : '/login'" method="GET">
+        <a href="order.html" th:href="@{/order}">Bestil her</a>
+    </li>
+
+
+    <li style="float:right"><a href="login.html" th:href="@{/login}" class="active">Login</a></li>
+
+    <li  style="float:right" class="dropdown" th:if="${session.currentUser != null}">
+        <a th:text="${session.currentUser.mail}" class="dropbtn"></a>
+        <div class="dropdown-content">
+            <a href="login.html" th:href="@{/logout}">Logout</a>
+            <a href="profile.html" th:href="@{/profile}">Profile</a>
+            <a href="admin.html" th:href="@{/admin}" class="active" th:if="${session.currentUser.role}">Admin</a>
+        </div>
+    </li>
+</ul>
+
+<div class="container">
+
 <p>Please log in:</p>
 <form method="post">
 
     <input type="text" name="mail" placeholder="Enter your mail">
     <input type="text" name="password" placeholder="Enter you password" autocomplete="off">
+    <br>
 
     <button type="submit" formaction="/login">Get access to paradise</button>
     <div><p class="error" th:unless="${#strings.isEmpty(message)}" th:text="${message}"></p></div>
@@ -23,7 +50,7 @@
     <a href="login.html" th:href="@{/logout}">Logout</a>
 </div>
 
-<a href="createuser.html" th:href="@{/createuser}">Create user</a>
-
+<a style="margin: 10px" href="createuser.html" th:href="@{/createuser}">Create user</a>
+</div>
 </body>
 </html>
