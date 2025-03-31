@@ -7,6 +7,8 @@ public class OrderDetails {
     int botID;
     int quantity;
     double totalPrice;
+    String topName;
+    String botName;
 
     public OrderDetails(int orderID, int topID, int botID, int quantity, double totalPrice, int id) {
         this.orderID = orderID;
@@ -70,5 +72,21 @@ public class OrderDetails {
 
     public void setTotalPrice(double totalPrice) {
         this.totalPrice = totalPrice;
+    }
+
+    public String getTopName() {
+        return topName;
+    }
+
+    public void setTopName(String topName) {
+        this.topName = topName;
+    }
+
+    public String getBotName() {
+        return botName;
+    }
+
+    public void setBotName(String botName) {
+        this.botName = botName;
     }
 }

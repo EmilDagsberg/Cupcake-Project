@@ -43,7 +43,7 @@ public class Main {
         // Routing
 
         UserController.addRoutes(app, connectionPool);
-        AdminController.addRoutes(app, connectionPool);
+        //AdminController.addRoutes(app, connectionPool);
 
         app.get("/", ctx -> ctx.render("index.html"));
         app.get("/order", ctx -> ctx.render("order.html"));

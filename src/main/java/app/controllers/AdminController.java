@@ -15,7 +15,7 @@ import java.util.List;
 public class AdminController {
 
     public AdminController(ConnectionPool connectionPool) {}
-
+/*
     public static void addRoutes(Javalin app, ConnectionPool connectionPool)    {
         app.get("/admin", ctx -> UserController.getAllUsers(ctx, connectionPool));
     }
@@ -32,6 +32,9 @@ public class AdminController {
 
     }
 }
+*/
 
+
+}
 
 // users: mail -> user_id;   order_history: user-id -> order_id;   order_details: order_id

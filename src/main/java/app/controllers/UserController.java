@@ -1,13 +1,13 @@
 package app.controllers;
 
-import app.entities.User;
+import app.entities.*;
 import app.exceptions.DatabaseException;
-import app.persistence.ConnectionPool;
-import app.persistence.UserMapper;
+import app.persistence.*;
 import io.javalin.Javalin;
 import io.javalin.http.Context;
 import org.jetbrains.annotations.NotNull;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public class UserController {
@@ -18,11 +18,15 @@ public class UserController {
         app.get("logout", ctx -> logout(ctx));
         app.get("createuser", ctx -> ctx.render("createuser.html"));
         app.post("createuser", ctx -> createUser(ctx, connectionPool));
-        app.get("profile", ctx -> ctx.render("profile.html"));
+        app.get("profile", ctx -> {
+            orderHistory(ctx, connectionPool);
+        });
         app.post("updateMail", ctx -> updateMail(ctx, connectionPool));
         app.post("updatePassword", ctx -> updatePassword(ctx, connectionPool));
         app.post("addMoney", ctx -> updateAmount(ctx, connectionPool));
+        app.get("/orderDetails", ctx -> orderDetails(ctx, connectionPool));
         app.get("index", ctx -> ctx.render("index.html"));
+
 
 
     }
@@ -151,4 +155,44 @@ public class UserController {
         }
 
     }
+
+    public static void orderHistory(Context ctx, ConnectionPool connectionPool) {
+        User user = ctx.sessionAttribute("currentUser");
+        if (user != null) {
+            try {
+                List<OrderHistory> orders = OrderHistoryMapper.getAllOrderHistoryByMail(user.getMail(), connectionPool);
+                user.setOrders(orders);
+                ctx.sessionAttribute("currentUser", user);
+
+
+                ctx.render("profile.html");
+            } catch (DatabaseException e) {
+                ctx.attribute("message", "Error loading orders.");
+                ctx.render("profile.html");
+            }
+        } else {
+            ctx.redirect("login");
+        }
+    }
+
+    public static void orderDetails(Context ctx, ConnectionPool connectionPool) throws SQLException {
+        int orderId = Integer.parseInt(ctx.queryParam("orderId"));
+        List<OrderDetails> details = OrderDetailsMapper.getOrderDetailsFromUser(orderId, connectionPool);
+
+        for(OrderDetails detail : details) {
+            CupcakeBot bot = BasketMapper.getNameFromBotID(detail.getBotID(), connectionPool);
+            CupcakeTop top = BasketMapper.getNameFromTopID(detail.getTopID(), connectionPool);
+
+            detail.setBotName(bot.getBottom());
+            detail.setTopName(top.getTopping());
+
+
+        }
+
+        ctx.attribute("orderDetails", details);
+        ctx.render("orderDetails.html");
+    }
+
+
+
 }

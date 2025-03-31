@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Order Details</title>
+</head>
+<body>
+
+<a href="profile.html" th:href="@{/profile}">Back to Profile</a>
+
+<h2>Order Details</h2>
+<table>
+  <tr>
+    <th>Topping</th>
+    <th>Bund</th>
+    <th>Mængde</th>
+    <th>Total Pris</th>
+  </tr>
+  <tr th:each="detail : ${orderDetails}">
+    <td th:text="${detail.topName}"></td>
+    <td th:text="${detail.botName}"></td>
+    <td th:text="${detail.quantity}"></td>
+    <td th:text="${detail.totalPrice} + ' DKK'"></td>
+  </tr>
+</table>
+
+</body>
+</html>
