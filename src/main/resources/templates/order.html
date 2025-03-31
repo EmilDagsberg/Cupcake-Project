@@ -7,60 +7,75 @@
     <link href="../public/css/styles.css" th:href="@{/css/styles.css}" rel="stylesheet"/>
 </head>
 <body>
-<header>
+
+<div class="generic-style">
     <a href="index.html" th:href="@{/}">
         <img alt="logo" src="../public/images/cupcakelogo.png" th:src="@{/images/cupcakelogo.png}"/>
     </a>
-
-</header>
-<div class="user-info">
-    <span th:text="${session.currentUser.mail}"></span>
-    <a href="basket.html" class="basket-icon">
-        <img alt="basket-logo" src="../public/images/basketIcon.png" th:src="@{/images/basketIcon.png}"/>
-    </a>
 </div>
+<ul>
+    <li><a href="index.html" th:href="@{/}">Hjem</a></li>
+    <li th:action="${session.currentUser != null} ? '/order' : '/login'" method="GET">
+        <a href="order.html" th:href="@{/order}">Bestil her</a>
+    </li>
+
+
+    <li style="float:right"><a href="login.html" th:href="@{/login}" class="active">Login</a></li>
+    <li  style="float:right" class="dropdown" th:if="${session.currentUser != null}">
+        <a th:text="${session.currentUser.mail}" class="dropbtn"></a>
+        <div class="dropdown-content">
+            <a href="login.html" th:href="@{/logout}">Logout</a>
+            <a href="profile.html" th:href="@{/profile}">Profile</a>
+            <a href="admin.html" th:href="@{/admin}" class="active" th:if="${session.currentUser.role}">Admin</a>
+
+        </div>
+    </li>
+</ul>
+
+
 <div class="container">
-<h1>Velkommen ombord</h1>
-<h2>Øens bedste cupcakes. Vælg og bestil her:</h2>
+    <h1>Velkommen ombord</h1>
+    <h2>Øens bedste cupcakes. Vælg og bestil her:</h2>
 
-<form action="/order" method="POST">
-    <div class="form-group">
-        <select name="bottom" required>
-            <option value="" selected disabled>Vælg bund</option>
-            <option value="Chocolate">Chokolade  |  5.00 kr</option>
-            <option value="Vanilla">Vanilje  |  5.00 kr</option>
-            <option value="Nutmeg">Muskatnød  |  5.00 kr</option>
-            <option value="Pistacio">Pistacie  |  6.00 kr</option>
-            <option value="Almond">Mandel  |  7.00 kr</option>
-        </select>
-    </div>
-
-    <div class="form-group">
-        <select name="topping" required>
-            <option value="" selected disabled>Vælg topping</option>
-            <option value="Chocolate">Chokolade  |  5.00 kr</option>
-            <option value="Blueberry">Blåbær  |  5.00 kr</option>
-            <option value="Raspberry">Hindbær  |  5.00 kr</option>
-            <option value="Crispy">Crispy  |  6.00 kr</option>
-            <option value="Strawberry">Jordbær  |  6.00 kr</option>
-            <option value="Rum/Raisin">Rom/Rosin  |  7.00 kr</option>
-            <option value="Orange">Appelsin  |  8.00 kr</option>
-            <option value="Lemon">Citron  |  8.00 kr</option>
-            <option value="Blue cheese">Blue cheese  |  9.00 kr</option>
-        </select>
+    <form action="/order" method="POST">
+        <div class="form-group">
+            <select name="topping" required class="basket">
+                <option value="" selected disabled>Vælg topping</option>
+                <option value="Chocolate">Chokolade  |  5.00 kr</option>
+                <option value="Blueberry">Blåbær  |  5.00 kr</option>
+                <option value="Raspberry">Hindbær  |  5.00 kr</option>
+                <option value="Crispy">Crispy  |  6.00 kr</option>
+                <option value="Strawberry">Jordbær  |  6.00 kr</option>
+                <option value="Rum/Raisin">Rom/Rosin  |  7.00 kr</option>
+                <option value="Orange">Appelsin  |  8.00 kr</option>
+                <option value="Lemon">Citron  |  8.00 kr</option>
+                <option value="Blue cheese">Blue cheese  |  9.00 kr</option>
+            </select>
         </div>
 
-    <div class="quantity-box">
-        <input type="number" id="quantity" name="quantity" min="1" placeholder="Vælg antal">
-    </div>
+        <div class="form-group">
+            <select name="bottom" required class="basket">
+                <option value="" selected disabled>Vælg bund</option>
+                <option value="Chocolate">Chokolade  |  5.00 kr</option>
+                <option value="Vanilla">Vanilje  |  5.00 kr</option>
+                <option value="Nutmeg">Muskatnød  |  5.00 kr</option>
+                <option value="Pistacio">Pistacie  |  6.00 kr</option>
+                <option value="Almond">Mandel  |  7.00 kr</option>
+            </select>
+        </div>
+
+
+        <div class="basket">
+            <input type="number" id="quantity" name="quantity" min="1" value="1" placeholder="Vælg antal">
+        </div>
 
         <button type="submit" class="add-to-cart">Læg i kurv</button>
-</form>
+    </form>
 
-<!-- Button to go to Basket -->
-<form action="/basket" method="GET">
-    <button type="submit">Gå til kurv</button>
-</form>
+    <!-- Button to go to Basket -->
+    <form action="/basket" method="GET">
+        <button type="submit" class="active">Gå til kurv</button>
+    </form>
 </div>
 </body>
 </html>

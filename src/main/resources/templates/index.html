@@ -28,7 +28,7 @@
         <div class="dropdown-content">
             <a href="login.html" th:href="@{/logout}">Logout</a>
             <a href="profile.html" th:href="@{/profile}">Profile</a>
-            <a class="active" href="admin.html">Admin</a>
+            <a href="admin.html" th:href="@{/admin}" class="active" th:if="${session.currentUser.role}">Admin</a>
         </div>
     </li>
 </ul>

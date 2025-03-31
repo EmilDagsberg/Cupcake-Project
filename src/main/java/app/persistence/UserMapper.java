@@ -28,7 +28,7 @@ public class UserMapper {
                 int id = rs.getInt("user_id");
                 double amount = rs.getDouble("amount");
                 boolean role = rs.getBoolean("role");
-                return new User(id, mail, password, amount,role);
+                return new User(id, mail, password, amount, role);
             } else {
                 throw new DatabaseException("Fejl i login. Prøv igen");
             }

@@ -60,6 +60,7 @@ li a:hover:not(.active) {
 .active {
     background-color: #663399;
     transition: background-color 0.3s;
+    color: white;
 }
 
 .active:hover {
@@ -139,7 +140,7 @@ p   {
 }
 
 select, input {
-    width: 50%;
+    margin: 10px;
     padding: 10px;
     font-size: 16px;
     border-radius: 5px;
@@ -165,7 +166,6 @@ select, input {
 
 /******* Buttons *********/
 button {
-    width: 25%;
     padding: 12px;
     border: none;
     font-size: 18px;
@@ -183,6 +183,16 @@ button {
 button:hover {
     opacity: 0.8;
 }
+
+.basket {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: auto;
+    padding: 10px;
+    width: 30%;
+}
+
 
 /***** Admin Area *****/
 .admin {

@@ -1,44 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <title>Profile</title>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <link href="../public/css/styles.css" th:href="@{/css/styles.css}" rel="stylesheet">
 </head>
 <body>
 
-<a href="index.html" th:href="@{/index}">Forside</a>
+<div class="generic-style">
+    <a href="index.html" th:href="@{/}">
+        <img alt="logo" src="../public/images/cupcakelogo.png" th:src="@{/images/cupcakelogo.png}"/>
+    </a>
+</div>
+<ul>
+    <li><a href="index.html" th:href="@{/}">Hjem</a></li>
+    <li th:action="${session.currentUser != null} ? '/order' : '/login'" method="GET">
+        <a href="order.html" th:href="@{/order}">Bestil her</a>
+    </li>
 
-<h2>Profile</h2>
 
-<form method="post">
+    <li style="float:right"><a href="login.html" th:href="@{/login}" class="active">Login</a></li>
 
-    <table>
-        <tr>
-            <td>Nuværende saldo:</td>
-            <td th:text="${session.currentUser.amount}"></td>
-            <td>DKK.</td>
-        </tr>
-        <tr>
-            <td>
-                <input type="number" name="amount" placeholder="Tilføj beløb">
-                <button type="submit" formaction="addMoney">Tilføj beløb til konto</button>
-            </td>
-        </tr>
-        <tr>
-            <td>Mail:</td>
-            <td th:text="${session.currentUser.mail}"></td>
-            <td><input type="text" name="mail" placeholder="New mail address here" ></td>
-            <td><button type="submit" name="profilemail" th:value="${session.currentUser.mail}" formaction="updateMail">Update</button></td>
-        </tr>
-        <tr>
-            <td>Password:</td>
-            <td th:text="${session.currentUser.password}"></td>
-            <td><input type="text" name="password" placeholder="New password here"></td>
-            <td><button type="submit" name="profilepassword" th:value="${session.currentUser.password}" formaction="updatePassword">Update</button></td>
-        </tr>
-    </table>
+    <li  style="float:right" class="dropdown" th:if="${session.currentUser != null}">
+        <a th:text="${session.currentUser.mail}" class="dropbtn"></a>
+        <div class="dropdown-content">
+            <a href="login.html" th:href="@{/logout}">Logout</a>
+            <a href="profile.html" th:href="@{/profile}">Profile</a>
+            <a href="admin.html" th:href="@{/admin}" class="active" th:if="${session.currentUser.role}">Admin</a>
+        </div>
+    </li>
+</ul>
 
-</form>
+<div class="container">
+
+    <h2>Profile</h2>
+
+    <form method="post">
+
+        <table style="margin: auto">
+            <tr>
+                <td>Nuværende saldo:</td>
+                <td th:text="${session.currentUser.amount}"></td>
+                <td>DKK.</td>
+            </tr>
+            <tr>
+                <td>Tilføj penge til konto:</td>
+                <td></td>
+                <td><input type="number" name="amount" placeholder="Tilføj beløb"></td>
+                <td><button type="submit" formaction="addMoney">Tilføj beløb til konto</button></td>
+            </tr>
+            <tr>
+                <td>Mail:</td>
+                <td th:text="${session.currentUser.mail}"></td>
+                <td><input type="text" name="mail" placeholder="New mail address here" ></td>
+                <td><button type="submit" name="profilemail" th:value="${session.currentUser.mail}" formaction="updateMail">Update</button></td>
+            </tr>
+            <tr>
+                <td>Password:</td>
+                <td th:text="${session.currentUser.password}"></td>
+                <td><input type="text" name="password" placeholder="New password here"></td>
+                <td><button type="submit" name="profilepassword" th:value="${session.currentUser.password}" formaction="updatePassword">Update</button></td>
+            </tr>
+        </table>
+
+    </form>
+
+</div>
 
 <h2>Ordre</h2>
 <ul>
