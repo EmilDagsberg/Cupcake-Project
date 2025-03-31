@@ -11,14 +11,14 @@
 <h2>Order Details</h2>
 <table>
   <tr>
-    <th>Top ID</th>
-    <th>Bottom ID</th>
-    <th>Quantity</th>
-    <th>Total Price</th>
+    <th>Topping</th>
+    <th>Bund</th>
+    <th>Mængde</th>
+    <th>Total Pris</th>
   </tr>
   <tr th:each="detail : ${orderDetails}">
-    <td th:text="${detail.topID}"></td>
-    <td th:text="${detail.botID}"></td>
+    <td th:text="${detail.topName}"></td>
+    <td th:text="${detail.botName}"></td>
     <td th:text="${detail.quantity}"></td>
     <td th:text="${detail.totalPrice} + ' DKK'"></td>
   </tr>

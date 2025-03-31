@@ -1,17 +1,13 @@
 package app.controllers;
 
-import app.entities.OrderDetails;
-import app.entities.OrderHistory;
-import app.entities.User;
+import app.entities.*;
 import app.exceptions.DatabaseException;
-import app.persistence.ConnectionPool;
-import app.persistence.OrderDetailsMapper;
-import app.persistence.OrderHistoryMapper;
-import app.persistence.UserMapper;
+import app.persistence.*;
 import io.javalin.Javalin;
 import io.javalin.http.Context;
 import org.jetbrains.annotations.NotNull;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public class UserController {
@@ -179,9 +175,20 @@ public class UserController {
         }
     }
 
-    public static void orderDetails(Context ctx, ConnectionPool connectionPool) {
+    public static void orderDetails(Context ctx, ConnectionPool connectionPool) throws SQLException {
         int orderId = Integer.parseInt(ctx.queryParam("orderId"));
         List<OrderDetails> details = OrderDetailsMapper.getOrderDetailsFromUser(orderId, connectionPool);
+
+        for(OrderDetails detail : details) {
+            CupcakeBot bot = BasketMapper.getNameFromBotID(detail.getBotID(), connectionPool);
+            CupcakeTop top = BasketMapper.getNameFromTopID(detail.getTopID(), connectionPool);
+
+            detail.setBotName(bot.getBottom());
+            detail.setTopName(top.getTopping());
+
+
+        }
+
         ctx.attribute("orderDetails", details);
         ctx.render("orderDetails.html");
     }
