@@ -107,6 +107,17 @@ li.dropdown {
     min-width: 20%;
 }
 
+.info-text{
+    width: 40vw;
+    float: left;
+    padding: 20px;
+    text-align: left;
+}
+
+.info-pic{
+    padding: 50px;
+    float: right;
+}
 /* Text styles */
 h1 {
     font-size: 50px;

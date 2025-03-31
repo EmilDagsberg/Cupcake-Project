@@ -14,7 +14,7 @@
     </a>
 </div>
 <ul>
-    <li><a href="default.asp">Hjem</a></li>
+    <li><a href="index.html" th:href="@{/}">Hjem</a></li>
     <li th:action="${session.currentUser != null} ? '/order' : '/login'" method="GET">
         <a href="order.html" th:href="@{/order}">Bestil her</a>
     </li>
@@ -22,8 +22,8 @@
 
     <li style="float:right"><a href="login.html" th:href="@{/login}" class="active">Login</a></li>
 
-    <li style="float:right" class="dropdown" th:if="${session.currentUser != null}">
-        <a th:text="${session.currentUser}" class="dropbtn"></a>
+    <li  style="float:right" class="dropdown" th:if="${session.currentUser != null}">
+        <a th:text="${session.currentUser.mail}" class="dropbtn"></a>
         <div class="dropdown-content">
             <a href="login.html" th:href="@{/logout}">Logout</a>
             <a href="profile.html" th:href="@{/profile}">Profile</a>
@@ -33,11 +33,24 @@
 </ul>
 
 <div class="container">
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin malesuada sed massa aliquam suscipit. Nullam nisi velit, placerat at suscipit sit amet, imperdiet eget ligula. Aenean eleifend elit consectetur, suscipit erat in, egestas tortor. Nulla congue, purus et pulvinar dignissim, nisi turpis rhoncus est, eget consectetur leo lacus ac tortor. Vivamus molestie risus non metus maximus ullamcorper. Proin facilisis urna sed orci dictum hendrerit. Duis in sapien porta, tincidunt nisl vel, hendrerit magna. Quisque eleifend ex lectus, nec accumsan nisl venenatis sed. Maecenas suscipit, velit sit amet dapibus ullamcorper, mi mauris sodales est, vitae iaculis tortor enim in arcu. Sed quis libero aliquet, vehicula neque vel, vestibulum ante. Aenean volutpat eros lacus, ac viverra magna fermentum et. Integer accumsan at enim et egestas.
 
-    Ut interdum est vel placerat iaculis. Vestibulum vel feugiat urna. Cras at lacinia est. Donec venenatis viverra ipsum sed mollis. Morbi vel nulla ac magna dictum imperdiet sed eget urna. Aenean sit amet ultrices elit. Maecenas ligula leo, commodo ac iaculis et, commodo quis urna. Mauris facilisis eleifend sapien, faucibus venenatis magna malesuada quis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; In vel dolor vulputate, tincidunt magna a, pulvinar odio. Ut in turpis in massa venenatis commodo. Aenean justo ex, rhoncus id lacus eu, vestibulum lacinia nulla. Maecenas pharetra ultrices commodo. Quisque consectetur ut ex ac ultrices. Aenean a ante et dolor porta ornare et nec turpis. Cras eget venenatis est, nec convallis magna.</p>
+    <div class="info-pic">
+        <img alt="Kirke" src="../public/images/Ols_Kirke_Bornholm.JPG" th:src="@{/images/Ols_Kirke_Bornholm.JPG}" width="350"/>
+    </div>
 
-</div>
+    <div class="info-text">
+     <h2>Lorem Ipsum</h2>
+     <p>
+         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur convallis leo placerat, scelerisque magna quis, interdum lorem. In facilisis quis est sed commodo. Curabitur vel velit eu mauris faucibus pretium. In commodo eros quis lacinia ultricies. Suspendisse interdum quam convallis metus facilisis, quis fringilla est aliquam. Donec purus quam, porta eleifend lacus vel, vulputate mattis quam. Aenean ornare condimentum tellus a mollis.
+     </p>
+     <p>
+         Vivamus non felis enim. Quisque rhoncus laoreet orci, vel egestas sapien semper et. Pellentesque nec lacinia lacus. Quisque hendrerit, tortor pretium gravida luctus, sem dolor sagittis ipsum, nec sodales tellus tellus ut mi. Fusce tempus imperdiet odio, sed dignissim quam venenatis non. Maecenas pretium, quam vel ultrices fermentum, nunc magna iaculis ex, eget vehicula risus neque ac purus. Aenean ac odio eu sem pharetra tempor sed sed massa. Cras faucibus massa ac arcu bibendum, ultrices dictum eros placerat. Nulla nec eleifend nulla. Suspendisse volutpat justo convallis metus consectetur tincidunt. Integer vulputate, magna ac aliquet tempus, mauris nulla porttitor lectus, a convallis mauris ex sit amet mauris. Proin cursus est enim, a venenatis leo ultricies at.
+     </p>
+     <p>
+         Donec malesuada mi eget libero condimentum, a faucibus dui viverra. Quisque in blandit metus, sit amet pharetra velit. Pellentesque tincidunt nibh vel felis porta tristique. Suspendisse feugiat tincidunt massa, ut posuere urna scelerisque ac. Quisque vel cursus orci, quis dignissim quam. Sed lobortis finibus metus id vestibulum. Sed ac bibendum erat. In hac habitasse platea dictumst. Morbi bibendum lobortis placerat. Etiam et tincidunt lectus. Suspendisse potenti. Suspendisse cursus mauris turpis, eget venenatis urna accumsan vel. Sed ut elit eu metus convallis lacinia eu sit amet lorem. Phasellus in iaculis orci, eget ornare odio.
+     </p>
+ </div>
+
 
 <ul class="cupcakes1">
     <li><img alt="cupcakePic" src="../public/images/rasberry.png" th:src="@{/images/rasberry.png}"/></li>
@@ -50,17 +63,7 @@
     <li><img alt="cupcakePic" src="../public/images/strawberry.png" th:src="@{/images/strawberry.png}"/></li>
 </ul>
 
-<div th:if="${session.currentUser != null}">
-    <span th:text="${session.currentUser.mail}"></span> |
-    <a href="login.html" th:href="@{/logout}">Logout</a>
-    <a href="profile.html" th:href="@{/profile}">Profile</a>
 </div>
-
-
-
-
-
-
 
 </body>
 </html>
