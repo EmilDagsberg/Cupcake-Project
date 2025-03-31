@@ -65,7 +65,7 @@ public class UserController {
             User user = UserMapper.login(mail, password, connectionPool);
             ctx.sessionAttribute("currentUser", user);
             // Hvis ja, send videre til index.html
-            ctx.attribute("message", "Velkommen: " + mail);
+            ctx.attribute("message", mail);
             ctx.render("index.html");
 
         }catch (DatabaseException e){
@@ -151,5 +151,4 @@ public class UserController {
         }
 
     }
-
 }
