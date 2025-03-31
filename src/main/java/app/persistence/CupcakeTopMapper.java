@@ -34,29 +34,26 @@ public class CupcakeTopMapper {
         return null; // Cupcake topping not found
     }
 
-    public boolean buyCupcakeTop(String topping, double price, int top_id, ConnectionPool connectionPool) {
-        String sql = "SELECT price FROM cupcake_top WHERE topping=? AND top_id=?";
+    public static CupcakeTop getNameFromTopID(int top_id, ConnectionPool connectionPool) throws SQLException {
+        String sql = "SELECT * FROM cupcake_top WHERE top_id = ?";
 
-        try(Connection conn = connectionPool.getConnection();
-            PreparedStatement stmt = conn.prepareStatement(sql)){
+        try (Connection conn = connectionPool.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            stmt.setString(1, topping);
-            stmt.setInt(2, top_id);
+
+            stmt.setInt(1, (top_id));
             ResultSet rs = stmt.executeQuery();
 
-            if (rs.next()){
-                double actualPrice = rs.getDouble("price");
+            if (rs.next()) {
+                return new CupcakeTop(
+                        rs.getInt("top_id"),
+                        rs.getString("topping"),
+                        rs.getDouble("price"));
 
-                if(actualPrice == price){
-                    System.out.println("Purchase completed: " + topping + " Price: " + price + " Bot ID: " + top_id);
-                    return true;
-                }else {
-                    return false;
-                }
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
-
-        }return false;
+            e.printStackTrace();
+        }
+        return null;
     }
 }
