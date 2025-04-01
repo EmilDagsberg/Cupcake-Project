@@ -5,12 +5,34 @@ body {
     text-align: center;
     margin: 0;
     padding: 0;
+
+    /*background-image: url("../images/bgimages/tilesf2.jpg");
+    background-repeat: repeat;
+    background-size: 100%;
+    background-position: top left;
+    background-attachment: fixed;
+    */
 }
 
 table   {
     margin: auto;
     padding: 30px;
 }
+
+h1 {
+    font-size: 50px;
+    color: black;
+}
+
+h2 {
+    font-size: 25px;
+    color: black;
+}
+
+p   {
+    padding: 10px;
+}
+
 
 
 /****** Header ******/
@@ -129,21 +151,6 @@ li.dropdown {
     border-radius: 5px;
 }
 
-
-/* Text styles */
-h1 {
-    font-size: 50px;
-    color: black;
-}
-
-h2 {
-    font-size: 25px;
-    color: black;
-}
-
-p   {
-    padding: 10px;
-}
 
 /****** Form Styling *******/
 .form-group {
