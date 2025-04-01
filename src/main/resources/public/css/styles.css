@@ -116,15 +116,20 @@ li.dropdown {
 
 .info-text{
     width: 40vw;
-    float: left;
     padding: 20px;
     text-align: left;
 }
 
-.info-pic{
-    padding: 50px;
-    float: right;
+.divider{
+    height: 10px;
+    width: 65vw;
+    margin: auto;
+    background: white;
+    box-shadow: inset 0 0 10px gray;
+    border-radius: 5px;
 }
+
+
 /* Text styles */
 h1 {
     font-size: 50px;
@@ -176,15 +181,21 @@ select, input {
 }
 
 /******* Cupcake pics styles ******/
-.cupcakes1, .cupcakes2 {
-    list-style-type: none;
-    padding: 0;
+.cupcakes-box {
     display: flex;
-    gap: 10px;
-    margin: 10px auto;
-    background-color: white;
+    flex-direction: row;
+    flex-wrap: wrap;
     justify-content: center;
-    allign-items: center;
+    align-items: center;
+    padding: 20px;
+    gap: 25px;
+    clear: both;
+
+}
+
+.cupcakes-box img{
+    width: 350px;
+    height: auto;
 }
 
 /******* Buttons *********/
