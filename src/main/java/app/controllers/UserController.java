@@ -16,7 +16,6 @@ public class UserController {
         app.post("login", ctx -> login(ctx, connectionPool));
         app.get("login", ctx -> ctx.render("login.html"));
         app.get("logout", ctx -> logout(ctx));
-        app.get("admin", ctx -> ctx.render("admin.html"));
         app.get("createuser", ctx -> ctx.render("createuser.html"));
         app.post("createuser", ctx -> createUser(ctx, connectionPool));
         app.get("profile", ctx -> {
@@ -27,6 +26,8 @@ public class UserController {
         app.post("addMoney", ctx -> updateAmount(ctx, connectionPool));
         app.get("/orderDetails", ctx -> orderDetails(ctx, connectionPool));
         app.get("index", ctx -> ctx.render("index.html"));
+        app.get("admin", ctx -> getAllUsers(ctx, connectionPool));
+
 
 
 
