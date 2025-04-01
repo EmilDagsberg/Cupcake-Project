@@ -65,6 +65,16 @@
 
     </form>
 
+    <h2>Dine ordre</h2>
+
+    <table class="task-table">
+        <tr th:each="order : ${session.currentUser.orders}">
+            <td>
+                <a th:href="@{/orderDetails(orderId=${order.orderID})}" th:text="'Order #' + ${order.orderID} + ' - ' + ${#temporals.format(order.date, 'dd/MM/yyyy')}"></a>
+            </td>
+        </tr>
+    </table>
+
 </div>
 
 </body>
