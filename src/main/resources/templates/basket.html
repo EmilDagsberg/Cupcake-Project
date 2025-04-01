@@ -3,35 +3,58 @@
 <head>
     <title>Basket</title>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="../public/css/styles.css" th:href="@{/css/styles.css}" rel="stylesheet"/>
 </head>
 <body>
-<header>
+
+<div class="generic-style">
     <a href="index.html" th:href="@{/}">
         <img alt="logo" src="../public/images/cupcakelogo.png" th:src="@{/images/cupcakelogo.png}"/>
     </a>
-</header>
+</div>
 
-<p>Ordrer</p>
-<p>Kunder</p>
-<div th:if="${paymentStatus != true}">
-<div th:if="${orders != null && !orders.isEmpty()}">
-    <div id="order-list">
-        <ul>
-            <li th:each="order : ${orders}">
-                <span th:text="${order.quantity} + 'x Cupcakes: ' + ${bottomNames[order.botID]} + ' bund & ' + ${toppingNames[order.topID]} + ' top'"></span>
-                <span> - <span th:text="${order.totalPrice}"></span> kr</span>
+<ul>
+    <li><a href="index.html" th:href="@{/}">Hjem</a></li>
+    <li th:action="${session.currentUser != null} ? '/order' : '/login'" method="GET">
+        <a href="order.html" th:href="@{/order}">Bestil her</a>
+    </li>
 
-                <!-- Remove button -->
-                <form action="/basket/remove" method="POST" style="display:inline;">
-                    <input type="hidden" name="botID" th:value="${order.botID}">
-                    <input type="hidden" name="topID" th:value="${order.topID}">
-                    <button type="submit">X</button>
-                </form>
-            </li>
-        </ul>
+
+    <li style="float:right"><a href="login.html" th:href="@{/login}" class="active">Login</a></li>
+
+    <li style="float:right" class="dropdown" th:if="${session.currentUser != null}">
+        <a th:text="${session.currentUser.mail}" class="dropbtn"></a>
+        <div class="dropdown-content">
+            <a href="login.html" th:href="@{/logout}">Logout</a>
+            <a href="profile.html" th:href="@{/profile}">Profile</a>
+            <a href="admin.html" th:href="@{/admin}" class="active" th:if="${session.currentUser.role}">Admin</a>
+        </div>
+    </li>
+</ul>
+<div class="container">
+
+    <h2>Ordrer</h2>
+
+    <div th:if="${paymentStatus != true}">
+        <div th:if="${orders != null && !orders.isEmpty()}">
+            <table class="task-table">
+                <tr th:each="order : ${orders}">
+                    <td th:text="${order.quantity} + 'x Cupcakes: ' + ${bottomNames[order.botID]} + ' bund & ' + ${toppingNames[order.topID]} + ' top'"></td>
+                    <td> - <span th:text="${order.totalPrice}"></span> kr</td>
+
+                    <!-- Remove button -->
+                    <td>
+                        <form action="/basket/remove" method="POST" style="display:inline;">
+                            <input type="hidden" name="botID" th:value="${order.botID}">
+                            <input type="hidden" name="topID" th:value="${order.topID}">
+                            <button type="submit">Slet</button>
+                        </form>
+                    </td>
+                </tr>
+            </table>
+        </div>
     </div>
+
     <div class="total">
         Total: <span th:text="${totalPrice}">0.00</span> kr
     </div>
@@ -39,24 +62,25 @@
     <form action="/basket" method="POST">
         <button type="submit">Betal nu</button>
     </form>
-</div>
 
 
-<div th:if="${orders == null || orders.isEmpty()}">
-    <p>Din kurv er tom.</p>
-</div>
+    <div th:if="${orders == null || orders.isEmpty()}">
+        <p>Din kurv er tom.</p>
+    </div>
 
 
-<form action="/order" method="GET">
-    <button type="submit">Fortsæt med at bestille</button>
-</form>
-    <div><p class="error" th:unless="${#strings.isEmpty(message)}" th:text="${message}"> </p></div>
-</div>
+    <form action="/order" method="GET">
+        <button type="submit">Fortsæt med at bestille</button>
+    </form>
+    <div><p class="error" th:unless="${#strings.isEmpty(message)}" th:text="${message}"></p></div>
 
-<div th:if="${paymentStatus}">
-    <h2>Tak for din ordre!</h2>
-    <p>Din ordre er betalt og registreret!</p>
-    <p>Du kan nu hente din ordre i vores butik</p>
+
+    <div th:if="${paymentStatus}">
+        <h2>Tak for din ordre!</h2>
+        <p>Din ordre er betalt og registreret!</p>
+        <p>Du kan nu hente din ordre i vores butik</p>
+    </div>
+
 </div>
 </body>
 </html>
