@@ -1,0 +1,34 @@
+@startuml
+|Customer|
+start
+:Create account;
+|#AntiqueWhite|System|
+:Makes user in database;
+|Customer|
+:Add cupcakes to basket;
+|System|
+:Saves the order;
+|Customer|
+:Looks at basket;
+|System|
+:Shows the saved orders and its relevant data;
+|Customer|
+:Order is payed;
+|System|
+:Finishes the order and saves all the detail in the database;
+:The amount paid is drawn from the customers account;
+|#Business|Olsker Cupcakes|
+:Bakes and readies the order for pick up;
+|Customer|
+:Customer can pick up the order;
+end
+
+|Customer|
+:Looks at profile page;
+|System|
+:Shows option to change mail and password and shows previous orders from database;
+|Customer|
+:Changes e-mail;
+|System|
+:Goes in database and updates the customers account with the new mail;
+@enduml
