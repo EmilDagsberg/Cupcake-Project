@@ -12,6 +12,7 @@ table   {
     padding: 30px;
 }
 
+
 /****** Header ******/
 .generic-style {
     background-color: #3A1561;
@@ -157,6 +158,23 @@ select, input {
     padding-left: 20px;
 }
 
+/****** Table ******/
+
+.task-table {
+    border-collapse: collapse;
+    font-size: 1.2rem;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.task-table td, .task-table th {
+    border: 1px solid #ddd;
+    padding: 10px;
+}
+
+.task-table tr:nth-child(even){
+    background-color: silver;
+}
+
 /******* Cupcake pics styles ******/
 .cupcakes1, .cupcakes2 {
     list-style-type: none;
@@ -198,21 +216,13 @@ button:hover {
     width: 30%;
 }
 
-
-/***** Admin Area *****/
-.admin {
-    background-color: #333333;
-    color: white;
-}
-
-
-
 /***** Error Styles *******/
 .error {
     border: 1px solid red;
     padding: 10px;
     color: red;
     max-width: 400px;
+    margin: auto;
 }
 
 

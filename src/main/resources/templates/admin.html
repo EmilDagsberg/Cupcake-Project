@@ -2,21 +2,49 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>ADMIN AREA</title>
+    <title>Admin</title>
+    <link href="../public/css/styles.css" th:href="@{/css/styles.css}" rel="stylesheet">
 </head>
 <body>
-<h1>ADMIN PANEL</h1>
-    <table border="1" class="admin">
+
+<div class="generic-style">
+    <a href="index.html" th:href="@{/}">
+        <img alt="logo" src="../public/images/cupcakelogo.png" th:src="@{/images/cupcakelogo.png}"/>
+    </a>
+</div>
+<ul>
+    <li><a href="index.html" th:href="@{/}">Hjem</a></li>
+    <li th:action="${session.currentUser != null} ? '/order' : '/login'" method="GET">
+        <a href="order.html" th:href="@{/order}">Bestil her</a>
+    </li>
+
+
+    <li style="float:right"><a href="login.html" th:href="@{/login}" class="active">Login</a></li>
+
+    <li style="float:right" class="dropdown" th:if="${session.currentUser != null}">
+        <a th:text="${session.currentUser.mail}" class="dropbtn"></a>
+        <div class="dropdown-content">
+            <a href="login.html" th:href="@{/logout}">Logout</a>
+            <a href="profile.html" th:href="@{/profile}">Profile</a>
+            <a href="admin.html" th:href="@{/admin}" class="active" th:if="${session.currentUser.role}">Admin</a>
+        </div>
+    </li>
+</ul>
+
+<div class="container">
+    <h2>ADMIN PANEL</h2>
+    <table class="task-table">
         <thead>
         <tr>
             <th>Email</th>
         </tr>
         </thead>
         <tbody>
-            <tr th:each="user : ${users}">
-                <td th:text="${user.mail}"></td>
-            </tr>
+        <tr th:each="user : ${users}">
+            <td th:text="${user.mail}"></td>
+        </tr>
         </tbody>
     </table>
+</div>
 </body>
 </html>

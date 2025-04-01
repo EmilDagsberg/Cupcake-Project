@@ -33,11 +33,11 @@
 </ul>
 <div class="container">
 
-    <p>Ordrer</p>
+    <h2>Ordrer</h2>
 
     <div th:if="${paymentStatus != true}">
         <div th:if="${orders != null && !orders.isEmpty()}">
-            <table>
+            <table class="task-table">
                 <tr th:each="order : ${orders}">
                     <td th:text="${order.quantity} + 'x Cupcakes: ' + ${bottomNames[order.botID]} + ' bund & ' + ${toppingNames[order.topID]} + ' top'"></td>
                     <td> - <span th:text="${order.totalPrice}"></span> kr</td>
