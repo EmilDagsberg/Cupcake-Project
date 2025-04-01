@@ -16,13 +16,16 @@
 <ul>
     <li><a href="index.html" th:href="@{/}">Hjem</a></li>
 
-    <li th:action="${session.currentUser != null} ? '/order' : '/login'" method="GET">
-        <a href="order.html" th:href="@{/order}">Bestil her</a>
+    <li th:if="${session.currentUser != null}">
+        <a th:href="@{/order}">Bestil her</a>
+    </li>
+    <li th:unless="${session.currentUser != null}">
+        <a th:href="@{/login}">Bestil her</a>
     </li>
 
     <li style="float:right"><a href="login.html" th:href="@{/login}" class="active">Login</a></li>
 
-    <li style="float:right" class="dropdown" th:if="${session.currentUser != null}">
+    <li  style="float:right" class="dropdown" th:if="${session.currentUser != null}">
         <a th:text="${session.currentUser.mail}" class="dropbtn"></a>
         <div class="dropdown-content">
             <a href="login.html" th:href="@{/logout}">Logout</a>

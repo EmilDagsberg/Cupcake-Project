@@ -7,17 +7,51 @@
 </head>
 <body>
 
-<h2>Please log in:</h2>
-<form method="post">
+<div class="generic-style">
+    <a href="index.html" th:href="@{/}">
+        <img alt="logo" src="../public/images/cupcakelogo.png" th:src="@{/images/cupcakelogo.png}"/>
+    </a>
+</div>
 
-    <input type="text" name="mail" placeholder="Enter your mail">
-    <input type="text" name="password1" placeholder="Enter you password" autocomplete="off">
-    <input type="text" name="password2" placeholder="Enter you password again" autocomplete="off">
+<ul>
+    <li><a href="index.html" th:href="@{/}">Hjem</a></li>
 
-    <button type="submit" formaction="/createuser">Create account</button>
-    <div><p th:text="${message}"></p></div>
+    <li th:if="${session.currentUser != null}">
+        <a th:href="@{/order}">Bestil her</a>
+    </li>
+    <li th:unless="${session.currentUser != null}">
+        <a th:href="@{/login}">Bestil her</a>
+    </li>
 
-</form>
+    <li style="float:right"><a href="login.html" th:href="@{/login}" class="active">Login</a></li>
 
+    <li style="float:right" class="dropdown" th:if="${session.currentUser != null}">
+        <a th:text="${session.currentUser.mail}" class="dropbtn"></a>
+        <div class="dropdown-content">
+            <a href="login.html" th:href="@{/logout}">Logout</a>
+            <a href="profile.html" th:href="@{/profile}">Profile</a>
+            <a href="admin.html" th:href="@{/admin}" class="active" th:if="${session.currentUser.role}">Admin</a>
+        </div>
+    </li>
+</ul>
+
+<div class="container">
+
+    <h2>Please log in:</h2>
+    <form method="post">
+
+        <input type="text" name="mail" placeholder="Enter your mail">
+        <br>
+        <input type="text" name="password1" placeholder="Enter you password" autocomplete="off">
+        <br>
+        <input type="text" name="password2" placeholder="Enter you password again" autocomplete="off">
+        <br>
+
+        <div><p th:text="${message}"></p></div>
+
+        <button type="submit" formaction="/createuser">Create account</button>
+    </form>
+
+</div>
 </body>
 </html>

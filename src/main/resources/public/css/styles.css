@@ -130,8 +130,8 @@ li.dropdown {
     background: white;
     width: 75vw;
     margin: auto;
-    padding-top: 10px;
-    padding-bottom: 10px;
+    padding-top: 20px;
+    padding-bottom: 50px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     min-width: 20%;
 }
