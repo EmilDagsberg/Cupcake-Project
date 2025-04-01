@@ -1,0 +1,13 @@
+@startuml
+class User
+class OrderHistory
+class OrderDetails
+class CupcakeTop
+class CupcakeBot
+
+User *-- OrderHistory
+OrderHistory *-- OrderDetails
+OrderDetails *-- CupcakeBot
+OrderDetails *-- CupcakeTop
+
+@enduml
