@@ -67,16 +67,5 @@
 
 </div>
 
-<h2>Ordre</h2>
-<ul>
-    <li th:each="order : ${session.currentUser.orders}">
-        <a th:href="@{/orderDetails(orderId=${order.orderID})}"
-           th:text="'Order #' + ${order.orderID} + ' - ' + ${#temporals.format(order.date, 'dd/MM/yyyy')}"></a>
-    </li>
-</ul>
-
-
-
-
 </body>
 </html>
