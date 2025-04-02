@@ -17,6 +17,8 @@ else (Not Logged in)
   endif
   : Order page;
 endif
+If (Profile)
+:
 : Basket page;
 : Order is successful;
 note right

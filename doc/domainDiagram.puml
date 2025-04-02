@@ -1,23 +1,15 @@
 @startuml
-class User
-class OrderHistory
-class OrderDetails
-class CupcakeTop
-class CupcakeBot
-class BasketController
-class CupcakeController
-class OrderHistoryController
-class UserController
-class ConnectionPool
-class CupcakeBotMapper
-class CupcakeTopMapper
-class OrderDetailsMapper
-class OrderHistoryMapper
-class UserMapper
+Object User
+Object Order
+Object OrderDetails
+Object Basket
+Object Admin
+Object CupcakeBottom
+Object CupcakeTop
 
-User *-- OrderHistory
-OrderHistory *-- OrderDetails
-OrderDetails *-- CupcakeBot
+User *-- Order
+Order *-- OrderDetails
+OrderDetails *-- CupcakeBottom
 OrderDetails *-- CupcakeTop
 
 @enduml
