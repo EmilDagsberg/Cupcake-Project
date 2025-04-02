@@ -1,6 +1,7 @@
 package app.persistence;
 
 import app.entities.OrderDetails;
+import app.entities.OrderHistory;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

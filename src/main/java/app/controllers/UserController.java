@@ -150,10 +150,15 @@ public class UserController {
     public static void getAllUsers(Context ctx, ConnectionPool connectionPool){
         try {
             List<User> users = UserMapper.getAllUsers(connectionPool);
+            List<OrderHistory> orders = OrderHistoryMapper.getAllOrders(connectionPool);
+
             ctx.attribute("users", users);
+            ctx.attribute("orders", orders);
             ctx.render("admin.html");
         } catch (DatabaseException e) {
             ctx.attribute(e.getMessage());
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
 
     }
@@ -194,7 +199,4 @@ public class UserController {
         ctx.attribute("orderDetails", details);
         ctx.render("orderDetails.html");
     }
-
-
-
 }

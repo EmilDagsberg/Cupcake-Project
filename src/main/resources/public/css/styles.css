@@ -1,7 +1,7 @@
 /**** General Styles ****/
 body {
     font-family: Arial, sans-serif;
-    background-color: #f5f5f5;
+    background-color: #E6E6FA;
     text-align: center;
     margin: 0;
     padding: 0;
@@ -127,7 +127,7 @@ li.dropdown {
 
 /* Page Container */
 .container {
-    background: white;
+    background: #f5f5f5;
     width: 75vw;
     margin: auto;
     padding-top: 20px;
