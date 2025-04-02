@@ -48,6 +48,23 @@
         </tr>
         </tbody>
     </table>
+
+
+    <table class="task-table">
+        <thead>
+        <tr>
+            <th>Orders</th>
+        </tr>
+        </thead>
+
+        <tr th:each="order : ${orders}">
+            <td>
+                <a th:href="@{/orderDetails(orderId=${order.orderID})}"
+                   th:text="'Order #' + ${order.orderID} + ' - ' + ${#temporals.format(order.date, 'dd/MM/yyyy')}"></a>
+            </td>
+        </tr>
+    </table>
+
 </div>
 </body>
 </html>

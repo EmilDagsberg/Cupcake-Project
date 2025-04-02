@@ -73,5 +73,25 @@ public class OrderHistoryMapper {
         return -1;
     }
 
+    public static List<OrderHistory> getAllOrders(ConnectionPool connectionPool) throws SQLException {
+        List<OrderHistory> orderHistoryList = new ArrayList<>();
+        String sql = "SELECT order_id, user_id, date FROM order_history";
+
+        try (Connection conn = connectionPool.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()){
+
+            while (rs.next()) {
+                orderHistoryList.add(new OrderHistory(
+                        rs.getInt("order_id"),
+                        rs.getInt("user_id"),
+                        rs.getTimestamp("date").toLocalDateTime()
+                ));
+            }
+            return orderHistoryList;
+        }catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
 
