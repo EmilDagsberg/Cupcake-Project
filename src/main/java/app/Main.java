@@ -38,9 +38,7 @@ public class Main {
         }).start(7070);
 
         // Routing
-
         UserController.addRoutes(app, connectionPool);
-
 
         app.get("/", ctx -> ctx.render("index.html"));
         app.get("/order", ctx -> ctx.render("order.html"));
@@ -48,7 +46,6 @@ public class Main {
         app.get("/basket", ctx -> basketController.showBasket(ctx));
         app.post("/basket/remove", basketController::removeItem);
         app.post("/basket", ctx -> basketController.handlePayment(ctx));
-
     }
 
 }

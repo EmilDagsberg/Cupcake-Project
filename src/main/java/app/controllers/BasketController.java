@@ -7,6 +7,7 @@ import app.entities.OrderDetails;
 import app.entities.User;
 import app.exceptions.DatabaseException;
 import app.persistence.*;
+import io.javalin.Javalin;
 import io.javalin.http.Context;
 import java.sql.SQLException;
 import java.util.HashMap;
@@ -14,6 +15,8 @@ import java.util.List;
 import java.util.Map;
 
 public class BasketController {
+
+
     ConnectionPool connectionPool;
     double totalPrice;
 
@@ -21,6 +24,7 @@ public class BasketController {
         this.connectionPool = connectionPool;
     }
 
+    // Makes a list of Cupcakes consisting of Maps for Topping and Bottom
     public void showBasket(Context ctx) throws SQLException {
         List<OrderDetails> orders = ctx.sessionAttribute("orders");
         Map<Integer, String> bottomNames = new HashMap<>();
@@ -86,6 +90,7 @@ public class BasketController {
         user.setAmount(userAmount);
     }
 
+    // Removes a cupcake from the basket
     public void removeItem(Context ctx){
         int botID = Integer.parseInt(ctx.formParam("botID"));
         int topID = Integer.parseInt(ctx.formParam("topID"));

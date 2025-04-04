@@ -12,6 +12,7 @@ import java.util.List;
 
 public class UserController {
 
+    // Routes for main
     public static void addRoutes(Javalin app, ConnectionPool connectionPool)    {
         app.post("login", ctx -> login(ctx, connectionPool));
         app.get("login", ctx -> ctx.render("login.html"));
@@ -33,6 +34,7 @@ public class UserController {
 
     }
 
+    // Updates current sessionUser money amount
     private static void updateAmount(Context ctx, ConnectionPool connectionPool) {
         int amount = Integer.parseInt(ctx.formParam("amount"));
 
@@ -163,6 +165,7 @@ public class UserController {
 
     }
 
+    // Gets a list of the order history
     public static void orderHistory(Context ctx, ConnectionPool connectionPool) {
         User user = ctx.sessionAttribute("currentUser");
         if (user != null) {
@@ -182,6 +185,7 @@ public class UserController {
         }
     }
 
+    // Gets a list of the order details
     public static void orderDetails(Context ctx, ConnectionPool connectionPool) throws SQLException {
         int orderId = Integer.parseInt(ctx.queryParam("orderId"));
         List<OrderDetails> details = OrderDetailsMapper.getOrderDetailsFromUser(orderId, connectionPool);
