@@ -97,7 +97,7 @@ public class UserController {
                 ctx.attribute("message", "Konto oprettet: " + mail + ". Venligst login");
                 ctx.render("login.html");
             } catch (DatabaseException e)   {
-                ctx.attribute("message", "Passwords matcher ikke. prøv igen");
+                ctx.attribute("message", "Passwords matcher ikke, eller konto eksistere allerede, prøv igen");
                 ctx.render("createuser.html");
             }
         }
