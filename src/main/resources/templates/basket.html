@@ -56,7 +56,6 @@
                 </tr>
             </table>
         </div>
-    </div>
 
     <div class="total">
         Total: <span th:text="${totalPrice}">0.00</span> kr
@@ -65,6 +64,7 @@
     <form action="/basket" method="POST">
         <button type="submit">Betal nu</button>
     </form>
+
 
 
     <div th:if="${orders == null || orders.isEmpty()}">
@@ -76,7 +76,7 @@
         <button type="submit">Fortsæt med at bestille</button>
     </form>
     <div><p class="error" th:unless="${#strings.isEmpty(message)}" th:text="${message}"></p></div>
-
+</div>
 
     <div th:if="${paymentStatus}">
         <h2>Tak for din ordre!</h2>
